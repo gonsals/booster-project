@@ -1,0 +1,172 @@
+---
+import "../../../../styles/global.css";
+import MainLayout from "../../../../layouts/MainLayout.astro";
+
+export const prerender = false;
+
+const { code } = Astro.params;
+const url = Astro.url;
+
+// query params
+const sort = url.searchParams.get("sort") ?? "value";
+const fun = url.searchParams.get("fun"); // boosterfun
+const art = url.searchParams.get("art");
+
+/* Helper toggle */
+function toggle(key: string, value = "1") {
+    const p = new URLSearchParams(url.search);
+    if (p.get(key) === value) p.delete(key);
+    else p.set(key, value);
+    return "?" + p.toString();
+}
+
+/* ===== SCRYFALL ===== */
+let allCards: any[] = [];
+let pageUrl = `https://api.scryfall.com/cards/search?q=e:${code}&unique=prints`;
+
+while (pageUrl) {
+    const res = await fetch(pageUrl);
+    if (!res.ok) break;
+
+    const json = await res.json();
+    allCards.push(...json.data);
+    pageUrl = json.has_more ? json.next_page : null;
+}
+
+/* ===== BASE FILTER ===== */
+let cards = allCards.filter(
+    (c) => c.booster === true && !c.promo && !c.digital && c.image_uris?.normal
+);
+
+/* ===== IMPORTANT PART ===== */
+/* ❌ HIDE BOOSTER FUN BY DEFAULT */
+if (fun !== "boosterfun") {
+    cards = cards.filter((c) => !c.promo_types?.includes("boosterfun"));
+}
+
+/* ===== EXTRA FILTERS ===== */
+if (art === "full") {
+    cards = cards.filter((c) => c.full_art === true);
+}
+
+/* ===== SORT ===== */
+if (sort === "rank") {
+    cards.sort((a, b) => (a.edhrec_rank ?? 999999) - (b.edhrec_rank ?? 999999));
+} else {
+    cards.sort((a, b) => {
+        const aP = parseFloat(a.prices?.usd ?? "0");
+        const bP = parseFloat(b.prices?.usd ?? "0");
+        return bP - aP;
+    });
+}
+---
+
+<MainLayout
+    content={{ title: `Boosters – ${code.toUpperCase()}`, code }}
+    showNav
+>
+    <main class="max-w-7xl mx-auto p-6">
+        <!-- HEADER -->
+        <header class="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <div>
+                <h1 class="text-3xl font-extrabold tracking-tight">
+                    Cartas de Booster
+                </h1>
+                <p class="mt-1 text-sm text-gray-600">
+                    Set {code.toUpperCase()} · Play Boosters
+                    {fun === "boosterfun" && " + Collector"}
+                </p>
+            </div>
+
+            <!-- FILTERS -->
+            <div class="flex flex-wrap gap-2 text-sm">
+                <a
+                    href={toggle("sort", "value")}
+                    class={`px-3 py-2 rounded border ${
+                        sort === "value" ? "bg-gray-900 text-white" : "bg-white"
+                    }`}
+                >
+                    Valor
+                </a>
+
+                <a
+                    href={toggle("sort", "rank")}
+                    class={`px-3 py-2 rounded border ${
+                        sort === "rank" ? "bg-gray-900 text-white" : "bg-white"
+                    }`}
+                >
+                    EDHREC
+                </a>
+
+                <a
+                    href={toggle("fun", "boosterfun")}
+                    class={`px-3 py-2 rounded border ${
+                        fun === "boosterfun"
+                            ? "bg-purple-600 text-white"
+                            : "bg-white"
+                    }`}
+                >
+                    Collector / Booster Fun
+                </a>
+
+                <a
+                    href={toggle("art", "full")}
+                    class={`px-3 py-2 rounded border ${
+                        art === "full" ? "bg-gray-900 text-white" : "bg-white"
+                    }`}
+                >
+                    Full Art
+                </a>
+            </div>
+        </header>
+
+        <!-- GRID -->
+        <section
+            class="grid gap-5"
+            style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));"
+        >
+            {
+                cards.map((card) => (
+                    <article class="bg-white rounded-xl border hover:shadow-md transition overflow-hidden">
+                        <img
+                            src={card.image_uris.normal}
+                            alt={card.name}
+                            loading="lazy"
+                            class="w-full"
+                        />
+
+                        <div class="p-3 text-sm">
+                            <h2 class="font-semibold truncate">{card.name}</h2>
+
+                            <div class="mt-1 flex justify-between text-xs text-gray-600">
+                                <span class="capitalize">{card.rarity}</span>
+
+                                {card.prices?.usd ? (
+                                    <span class="font-semibold">
+                                        ${card.prices.usd}
+                                    </span>
+                                ) : (
+                                    <span class="text-gray-400">—</span>
+                                )}
+                            </div>
+
+                            {card.edhrec_rank && (
+                                <div class="mt-1 text-xs text-gray-400">
+                                    EDHREC #{card.edhrec_rank}
+                                </div>
+                            )}
+                        </div>
+                    </article>
+                ))
+            }
+        </section>
+
+        {
+            cards.length === 0 && (
+                <p class="mt-10 text-sm text-gray-600">
+                    No hay cartas para estos filtros.
+                </p>
+            )
+        }
+    </main>
+</MainLayout>

@@ -1,0 +1,59 @@
+---
+import "../styles/global.css";
+
+const { content = {}, showNav = false } = Astro.props;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{content.title ?? "MTG"}</title>
+    </head>
+
+    <body class="min-h-screen bg-gray-50 text-gray-900">
+        {
+            showNav && (
+                <header class="bg-white border-b border-gray-200">
+                    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                        {/* Navegación izquierda */}
+                        <nav class="flex items-center gap-2 text-sm">
+                            <a
+                                href="/sets/1"
+                                class="text-gray-500 hover:text-gray-900 transition"
+                            >
+                                Sets
+                            </a>
+
+                            <span class="text-gray-300">›</span>
+
+                            {content.code && (
+                                <span
+                                    class="px-2 py-0.5 text-xs font-semibold uppercase tracking-wide
+                   bg-gray-100 text-gray-700 rounded"
+                                >
+                                    {content.code}
+                                </span>
+                            )}
+                        </nav>
+
+                        {/* Título opcional */}
+                        {content.title && (
+                            <div class="text-sm font-medium text-gray-600 hidden sm:block">
+                                {content.title}
+                            </div>
+                        )}
+                    </div>
+                </header>
+            )
+        }
+
+        <main class="py-8">
+            <slot />
+        </main>
+
+        <footer class="mt-16 text-center text-xs text-gray-400 pb-8">
+            Made with Astro · MTG
+        </footer>
+    </body>
+</html>
