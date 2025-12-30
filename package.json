@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@astrojs/mdx": "^4.3.13",
+        "@astrojs/vercel": "^9.0.2",
         "@tailwindcss/vite": "^4.1.18",
         "@types/canvas-confetti": "^1.9.0",
         "astro": "^5.16.6",
