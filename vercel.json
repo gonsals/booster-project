@@ -1,8 +1,8 @@
 {
-    "rewrites": [
+    "redirects": [
         {
             "source": "/",
-            "destination": "https://booster-project.vercel.app/sets/1",
+            "destination": "/sets/1",
             "permanent": true
         }
     ]
