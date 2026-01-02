@@ -1,0 +1,13 @@
+---
+// components/FilterButton.astro
+const { href, active } = Astro.props;
+---
+
+<a
+    href={href}
+    class={`px-3 py-2 rounded border ${
+        active ? "bg-gray-900 text-white" : "bg-white"
+    }`}
+>
+    <slot />
+</a>

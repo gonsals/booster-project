@@ -1,0 +1,28 @@
+export type Identifiers = {
+    abuId?: string;
+    cardKingdomEtchedId?: string;
+    cardKingdomFoilId?: string;
+    cardKingdomId?: string;
+    cardsphereId?: string;
+    cardsphereFoilId?: string;
+    cardtraderId?: string;
+    csiId?: string;
+    mcmId?: string;
+    mcmMetaId?: string;
+    miniaturemarketId?: string;
+    mtgArenaId?: string;
+    mtgjsonFoilVersionId?: string;
+    mtgjsonNonFoilVersionId?: string;
+    mtgjsonV4Id?: string;
+    mtgoFoilId?: string;
+    mtgoId?: string;
+    multiverseId?: string;
+    scgId?: string;
+    scryfallId?: string;
+    scryfallCardBackId?: string;
+    scryfallOracleId?: string;
+    scryfallIllustrationId?: string;
+    tcgplayerProductId?: string;
+    tcgplayerEtchedProductId?: string;
+    tntId?: string;
+};

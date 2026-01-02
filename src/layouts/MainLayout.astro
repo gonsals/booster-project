@@ -1,14 +1,17 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 const { content = {}, showNav = false } = Astro.props;
 ---
 
 <html lang="en">
     <head>
+        <ClientRouter />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>{content.title ?? "MTG"}</title>
+        <link rel="icon" href="/mtg-top-picks.png" />
     </head>
 
     <body class="min-h-screen bg-gray-50 text-gray-900">

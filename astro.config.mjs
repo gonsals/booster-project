@@ -1,15 +1,21 @@
 // @ts-check
 
-import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'astro/config';
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "astro/config";
+import path from "node:path";
 
-import vercel from '@astrojs/vercel';
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-      plugins: [tailwindcss()],
-	},
+    vite: {
+        plugins: [tailwindcss()],
+        resolve: {
+            alias: {
+                "@": path.resolve("./src"),
+            },
+        },
+    },
 
-  adapter: vercel(),
+    adapter: vercel(),
 });

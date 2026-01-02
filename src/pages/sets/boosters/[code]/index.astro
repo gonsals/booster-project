@@ -1,6 +1,8 @@
 ---
-import "../../../../styles/global.css";
-import MainLayout from "../../../../layouts/MainLayout.astro";
+import "@/styles/global.css";
+import MainLayout from "@/layouts/MainLayout.astro";
+import FilterButton from "@/components/FilterButton.astro";
+import type { ScryfallCard } from "@/types/scryfall/ScryFallCard";
 
 export const prerender = false;
 
@@ -9,23 +11,81 @@ const url = Astro.url;
 
 // query params
 const sort = url.searchParams.get("sort") ?? "value";
-const fun = url.searchParams.get("fun"); // boosterfun
+const fun = url.searchParams.get("fun");
 const art = url.searchParams.get("art");
 
+const filterButtons = [
+    {
+        label: "Valor",
+        key: "sort",
+        value: "value",
+        isActive: () => sort === "value",
+    },
+    {
+        label: "EDHREC",
+        key: "sort",
+        value: "rank",
+        isActive: () => sort === "rank",
+    },
+    {
+        label: "Collector",
+        key: "fun",
+        value: "boosterfun",
+        isActive: () => fun === "boosterfun",
+    },
+    {
+        label: "Full Art",
+        key: "art",
+        value: "full",
+        isActive: () => art === "full",
+    },
+];
+
 /* Helper toggle */
-function toggle(key: string, value = "1") {
-    const p = new URLSearchParams(url.search);
-    if (p.get(key) === value) p.delete(key);
-    else p.set(key, value);
-    return "?" + p.toString();
+function toggle(key: string, value: string) {
+    const params = new URLSearchParams(url.search);
+
+    if (params.get(key) === value) {
+        params.delete(key);
+    } else {
+        params.set(key, value);
+    }
+
+    return "?" + params.toString();
 }
 
 /* ===== SCRYFALL ===== */
-let allCards: any[] = [];
-let pageUrl = `https://api.scryfall.com/cards/search?q=e:${code}&unique=prints`;
+
+let allCards: ScryfallCard[] = [];
+let pageUrl: string =
+    `https://api.scryfall.com/cards/search` +
+    `?q=e:${code}` +
+    `&unique=prints` +
+    `&fields=` +
+    [
+        "id",
+        "name",
+        "set_name",
+        "rarity",
+        "prices",
+        "image_uris",
+        "booster",
+        "promo",
+        "promo_types",
+        "digital",
+        "full_art",
+        "edhrec_rank",
+    ].join(",");
 
 while (pageUrl) {
-    const res = await fetch(pageUrl);
+    const res = await fetch(pageUrl, {
+        headers: {
+            Accept: "application/json",
+            "Cache-Control":
+                "public, s-maxage=21600, stale-while-revalidate=86400",
+        },
+    });
+
     if (!res.ok) break;
 
     const json = await res.json();
@@ -34,89 +94,73 @@ while (pageUrl) {
 }
 
 /* ===== BASE FILTER ===== */
-let cards = allCards.filter(
-    (c) => c.booster === true && !c.promo && !c.digital && c.image_uris?.normal
-);
+let cards: ScryfallCard[] = allCards.filter((c) => {
+    if (!c.image_uris?.normal) return false;
 
-/* ===== IMPORTANT PART ===== */
-/* ❌ HIDE BOOSTER FUN BY DEFAULT */
-if (fun !== "boosterfun") {
-    cards = cards.filter((c) => !c.promo_types?.includes("boosterfun"));
-}
+    if (fun !== "boosterfun" && c.promo_types?.includes("boosterfun")) {
+        return false;
+    }
 
-/* ===== EXTRA FILTERS ===== */
-if (art === "full") {
-    cards = cards.filter((c) => c.full_art === true);
-}
+    if (art === "full" && c.full_art !== true) {
+        return false;
+    }
+
+    return true;
+});
 
 /* ===== SORT ===== */
+
+function getPrice(card: ScryfallCard): number {
+    const p = card.prices;
+    if (!p) return 0;
+
+    return (p.usd && Number(p.usd)) || (p.usd_foil && Number(p.usd_foil)) || 0;
+}
+
+// DESC sort
 if (sort === "rank") {
     cards.sort((a, b) => (a.edhrec_rank ?? 999999) - (b.edhrec_rank ?? 999999));
 } else {
     cards.sort((a, b) => {
-        const aP = parseFloat(a.prices?.usd ?? "0");
-        const bP = parseFloat(b.prices?.usd ?? "0");
-        return bP - aP;
+        const aPrice = getPrice(a);
+        const bPrice = getPrice(b);
+        return bPrice - aPrice; // DESC
     });
 }
 ---
 
 <MainLayout
-    content={{ title: `Boosters – ${code.toUpperCase()}`, code }}
+    content={{ title: `Boosters – ${code?.toUpperCase()}`, code }}
     showNav
 >
     <main class="max-w-7xl mx-auto p-6">
         <!-- HEADER -->
         <header class="flex flex-wrap items-end justify-between gap-4 mb-8">
             <div>
-                <h1 class="text-3xl font-extrabold tracking-tight">
-                    Cartas de Booster
+                <h1
+                    class="text-3xl font-extrabold tracking-tight"
+                    transition:name={`set-title-${code}`}
+                >
+                    {cards[0]?.set_name ?? code?.toUpperCase()}
                 </h1>
                 <p class="mt-1 text-sm text-gray-600">
-                    Set {code.toUpperCase()} · Play Boosters
+                    Set {code?.toUpperCase()} · Play Boosters
                     {fun === "boosterfun" && " + Collector"}
                 </p>
             </div>
 
             <!-- FILTERS -->
             <div class="flex flex-wrap gap-2 text-sm">
-                <a
-                    href={toggle("sort", "value")}
-                    class={`px-3 py-2 rounded border ${
-                        sort === "value" ? "bg-gray-900 text-white" : "bg-white"
-                    }`}
-                >
-                    Valor
-                </a>
-
-                <a
-                    href={toggle("sort", "rank")}
-                    class={`px-3 py-2 rounded border ${
-                        sort === "rank" ? "bg-gray-900 text-white" : "bg-white"
-                    }`}
-                >
-                    EDHREC
-                </a>
-
-                <a
-                    href={toggle("fun", "boosterfun")}
-                    class={`px-3 py-2 rounded border ${
-                        fun === "boosterfun"
-                            ? "bg-purple-600 text-white"
-                            : "bg-white"
-                    }`}
-                >
-                    Collector / Booster Fun
-                </a>
-
-                <a
-                    href={toggle("art", "full")}
-                    class={`px-3 py-2 rounded border ${
-                        art === "full" ? "bg-gray-900 text-white" : "bg-white"
-                    }`}
-                >
-                    Full Art
-                </a>
+                {
+                    filterButtons.map((f) => (
+                        <FilterButton
+                            href={toggle(f.key, f.value)}
+                            active={f.isActive()}
+                        >
+                            {f.label}
+                        </FilterButton>
+                    ))
+                }
             </div>
         </header>
 
@@ -129,7 +173,7 @@ if (sort === "rank") {
                 cards.map((card) => (
                     <article class="bg-white rounded-xl border hover:shadow-md transition overflow-hidden">
                         <img
-                            src={card.image_uris.normal}
+                            src={card.image_uris?.normal}
                             alt={card.name}
                             loading="lazy"
                             class="w-full"
@@ -144,6 +188,10 @@ if (sort === "rank") {
                                 {card.prices?.usd ? (
                                     <span class="font-semibold">
                                         ${card.prices.usd}
+                                    </span>
+                                ) : card.prices?.usd_foil !== null ? (
+                                    <span class="font-semibold">
+                                        ${card.prices.usd_foil}
                                     </span>
                                 ) : (
                                     <span class="text-gray-400">—</span>
