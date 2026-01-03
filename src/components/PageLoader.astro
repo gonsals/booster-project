@@ -1,0 +1,51 @@
+<!-- src/components/PageLoader.astro -->
+<div id="page-loader" class="loader hidden">
+    <div class="booster">
+        <img class="w-full" src="/pruba-loader-grande.gif" alt="Loading..." />
+        <p>Abriendo sobres...</p>
+    </div>
+</div>
+
+<style>
+    .loader {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    .loader.hidden {
+        display: none;
+    }
+
+    .booster img {
+        animation: shake 1s infinite;
+    }
+
+    @keyframes shake {
+        0% {
+            transform: translateY(0) rotate(0);
+        }
+        50% {
+            transform: translateY(-6px) rotate(1deg);
+        }
+        100% {
+            transform: translateY(0) rotate(0);
+        }
+    }
+</style>
+
+<script>
+    const loader = document.getElementById("page-loader");
+
+    document.addEventListener("astro:before-preparation", () => {
+        loader?.classList.remove("hidden");
+    });
+
+    document.addEventListener("astro:after-swap", () => {
+        loader?.classList.add("hidden");
+    });
+</script>

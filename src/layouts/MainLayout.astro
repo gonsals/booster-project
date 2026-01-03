@@ -1,4 +1,5 @@
 ---
+import PageLoader from "@/components/PageLoader.astro";
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 
@@ -58,5 +59,6 @@ const { content = {}, showNav = false } = Astro.props;
         <footer class="mt-16 text-center text-xs text-gray-400 pb-8">
             Made with Astro · MTG
         </footer>
+        <PageLoader />
     </body>
 </html>
