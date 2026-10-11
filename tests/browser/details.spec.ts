@@ -31,7 +31,7 @@ test("card modal opens instantly, uses the selected booster odds and keeps focus
     await page.keyboard.press("Escape");
     await expect(modal).toBeHidden();
     await expect(button).toBeFocused();
-    expect(await page.evaluate(() => document.documentElement.classList.contains("modal-open"))).toBe(false);
+    await expect(page.locator("html")).not.toHaveClass(/modal-open/);
     await button.click();
     const other = detail.products.find(p => p.key !== "play" && p.odds);
     if (other) {

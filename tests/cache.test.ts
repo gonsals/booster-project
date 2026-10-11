@@ -2,6 +2,20 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createCache } from "../src/lib/cache.ts";
 
+test("previews can expire sooner than released products", async () => {
+    const original = Date.now;
+    let now = 1000;
+    Date.now = () => now;
+    try {
+        const cache = createCache<{ preview: boolean; version: number }>(data => data.preview ? 300_000 : 3_600_000);
+        await cache("preview", async () => ({ preview: true, version: 1 }));
+        await cache("released", async () => ({ preview: false, version: 1 }));
+        now += 300_001;
+        assert.equal((await cache("preview", async () => ({ preview: true, version: 2 }))).version, 2);
+        assert.equal((await cache("released", async () => ({ preview: false, version: 2 }))).version, 1);
+    } finally { Date.now = original; }
+});
+
 test("concurrent visitors share the download; a failed download can be retried", async () => {
     const cache = createCache<number>(1000);
     let calls = 0;

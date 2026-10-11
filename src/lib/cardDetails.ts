@@ -9,6 +9,7 @@ export function cardDetails(entry: BoosterCard, labels: Record<string, string>) 
         rarity: card.rarity, artist: card.artist, type: card.type_line, mana: card.mana_cost,
         text: card.oracle_text, power: card.power, toughness: card.toughness, rank: card.edhrec_rank,
         url: card.scryfall_uri, images: cardImages(card),
+        preview: !!entry.preview, provisional: !!entry.provisional, reveal: entry.preview ? card.preview : undefined,
         faces: card.card_faces?.map(f => ({ name: f.name, type: f.type_line, mana: f.mana_cost, text: f.oracle_text })),
         prices: finishes.map(finish => ({ finish, price: priceFor(card, finish), confirmed: card.finishes?.includes(finish) ?? false })),
         products: Object.entries(products).map(([key, available]) => ({ key, label: labels[key] ?? key,

@@ -38,7 +38,7 @@ test("a failed later Scryfall batch is rejected, never cached as a partial colle
     let fail = true;
     globalThis.fetch = async (input, init) => {
         const url = String(input);
-        if (url.includes("mtgjson")) return Response.json({ meta: { date: "2026-10-10" }, data: { code: "ERR", name: "Preview", releaseDate: "2027-01-01", cards: Array.from({ length: 76 }, (_, i) => ({ uuid: `uuid-${i}`, identifiers: { scryfallId: `id-${i}` }, finishes: ["nonfoil"], availability: ["paper"] })) } });
+        if (url.includes("mtgjson")) return Response.json({ meta: { date: "2026-10-10" }, data: { code: "ERR", name: "Provisional", releaseDate: "2025-01-01", cards: Array.from({ length: 76 }, (_, i) => ({ uuid: `uuid-${i}`, identifiers: { scryfallId: `id-${i}` }, finishes: ["nonfoil"], availability: ["paper"] })) } });
         const ids = JSON.parse(String(init?.body)).identifiers;
         if (fail && ids.length === 1) return new Response("", { status: 503 });
         // These previews deliberately have booster=false; they must still be included.
@@ -99,7 +99,7 @@ test("Scryfall 429 starts a cooldown and repeated visitors do not hit the provid
     const original = globalThis.fetch;
     let calls = 0;
     globalThis.fetch = async (input) => {
-        if (String(input).includes("mtgjson")) return Response.json({ meta: { date: "2026-10-10" }, data: { code: "LIM", name: "Limited", releaseDate: "2027-01-01", cards: [{ uuid: "limited", identifiers: { scryfallId: "limited" }, finishes: ["nonfoil"], availability: ["paper"] }] } });
+        if (String(input).includes("mtgjson")) return Response.json({ meta: { date: "2026-10-10" }, data: { code: "LIM", name: "Limited", releaseDate: "2025-01-01", cards: [{ uuid: "limited", identifiers: { scryfallId: "limited" }, finishes: ["nonfoil"], availability: ["paper"] }] } });
         calls++;
         return new Response("", { status: 429, headers: { "Retry-After": "5" } });
     };
