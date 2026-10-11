@@ -1,63 +1,37 @@
----
+﻿---
 import PageLoader from "@/components/PageLoader.astro";
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
-
-const { content = {}, showNav = false } = Astro.props;
+interface Props { content?: { title?: string; code?: string }; showNav?: boolean }
+const { content = {} } = Astro.props;
 ---
-
-<html lang="en">
+<html lang="es">
     <head>
-        <ClientRouter />
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>{content.title ?? "MTG"}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Tu próxima gran carta empieza con un sobre. Explora colecciones de Magic, todas sus impresiones y precios por acabado." />
+        <link rel="preconnect" href="https://cards.scryfall.io" />
+        <ClientRouter />
+        <title>{content.title ?? "MTG Top Picks"}</title>
         <link rel="icon" href="/mtg-top-picks.png" />
     </head>
-
-    <body class="min-h-screen bg-gray-50 text-gray-900">
-        {
-            showNav && (
-                <header class="bg-white border-b border-gray-200">
-                    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                        {/* Navegación izquierda */}
-                        <nav class="flex items-center gap-2 text-sm">
-                            <a
-                                href="/sets/1"
-                                class="text-gray-500 hover:text-gray-900 transition"
-                            >
-                                Sets
-                            </a>
-
-                            <span class="text-gray-300">›</span>
-
-                            {content.code && (
-                                <span
-                                    class="px-2 py-0.5 text-xs font-semibold uppercase tracking-wide
-                   bg-gray-100 text-gray-700 rounded"
-                                >
-                                    {content.code}
-                                </span>
-                            )}
-                        </nav>
-
-                        {/* Título opcional */}
-                        {content.title && (
-                            <div class="text-sm font-medium text-gray-600 hidden sm:block">
-                                {content.title}
-                            </div>
-                        )}
-                    </div>
-                </header>
-            )
-        }
-
-        <main class="py-8">
-            <slot />
-        </main>
-
-        <footer class="mt-16 text-center text-xs text-gray-400 pb-8">
-            Made with Astro · MTG
+    <body class="app-theme">
+        <a href="#contenido" class="skip-link">Saltar al contenido</a>
+        <header class="site-header">
+            <div class="site-header-inner">
+                <a href="/sets/1" class="brand" aria-label="MTG Top Picks, inicio">
+                    <span class="brand-mark" aria-hidden="true">✦</span>
+                    <span>MTG <strong>TOP PICKS</strong><small>THE BOOSTER COLLECTION</small></span>
+                </a>
+                <nav aria-label="Navegación principal" class="site-nav"><a href="/sets/1" aria-current={!content.code ? "page" : undefined}>Colecciones</a>{content.code && <span class="code-chip">{content.code}</span>}</nav>
+                <span class="header-caption"><i></i> El multiverso, a tu alcance</span>
+            </div>
+        </header>
+        <div id="contenido" tabindex="-1"><slot /></div>
+        <footer class="site-footer">
+            <a href="/sets/1" class="footer-brand">✦ MTG TOP PICKS</a>
+            <div><p>Imágenes y precios de <a href="https://scryfall.com">Scryfall</a> · sobres de <a href="https://mtgjson.com">MTGJSON</a>.</p><p>Precios orientativos en USD. Proyecto independiente de Wizards of the Coast.</p></div>
+            <span class="footer-note">Hecho para quienes coleccionan.</span>
         </footer>
         <PageLoader />
     </body>

@@ -1,0 +1,12 @@
+.git/
+.cache/
+.astro/
+node_modules/
+dist/
+test-results/
+playwright-report/
+reports/
+tests/
+scripts/
+playwright*.config.ts
+.env*

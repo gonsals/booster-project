@@ -1,13 +1,5 @@
----
-// components/FilterButton.astro
+﻿---
+interface Props { href: string; active: boolean }
 const { href, active } = Astro.props;
 ---
-
-<a
-    href={href}
-    class={`px-3 py-2 rounded border ${
-        active ? "bg-gray-900 text-white" : "bg-white"
-    }`}
->
-    <slot />
-</a>
+<a href={href} aria-current={active ? "true" : undefined} class:list={["filter-button", { "is-active": active }]}><slot /></a>
