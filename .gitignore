@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# build and browser-test artifacts
+.vercel/
+test-results/
+playwright-report/
+.cache/
+.vercel
+.env*

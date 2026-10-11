@@ -2,12 +2,17 @@ import type { APIRoute } from "astro";
 import { getSetList } from "@/lib/setList";
 
 export const GET: APIRoute = async () => {
-    const data = await getSetList();
+    try {
+        const data = await getSetList();
 
-    return new Response(JSON.stringify(data), {
-        headers: {
-            "Content-Type": "application/json",
-            "Cache-Control": "public, max-age=86400",
-        },
-    });
+        return new Response(JSON.stringify(data), {
+            headers: {
+                "Content-Type": "application/json",
+                "Cache-Control": "public, max-age=300, s-maxage=3600",
+            },
+        });
+    } catch (error) {
+        console.error("Set list unavailable", error);
+        return Response.json({ error: "No se pudo actualizar el catálogo. Inténtalo de nuevo." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+    }
 };

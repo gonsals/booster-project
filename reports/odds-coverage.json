@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-10-10T17:07:19.943Z",
+  "sources": {
+    "mtgjson": "2026-10-10",
+    "scryfall": "2026-10-10T09:06:04.967+00:00",
+    "url": "https://data.scryfall.io/default-cards/default-cards-20261010090604.jsonl.gz"
+  },
+  "configurations": 677,
+  "printingProducts": 170102,
+  "approximate": 33576,
+  "failures": []
+}

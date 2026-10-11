@@ -1,19 +1,46 @@
 {
     "name": "booster-project",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.1.0",
+    "packageManager": "pnpm@10.10.0",
+    "engines": {
+        "node": ">=22.12.0"
+    },
     "scripts": {
         "dev": "astro dev",
         "build": "astro build",
-        "preview": "astro preview"
+        "preview": "astro preview",
+        "check": "astro check",
+        "test": "node --test --experimental-strip-types tests/*.test.ts",
+        "test:e2e": "playwright test",
+        "test:build": "node scripts/test-build.mjs",
+        "test:coverage": "node scripts/download-audit-data.mjs && node --experimental-strip-types scripts/audit-coverage.ts && node --experimental-strip-types scripts/audit-odds.ts && pnpm build && node --experimental-strip-types scripts/test-coverage-build.ts",
+        "test:e2e:snapshot": "pnpm build && playwright test --config=playwright.snapshot.config.ts"
     },
     "dependencies": {
-        "@astrojs/mdx": "^4.3.13",
-        "@astrojs/vercel": "^9.0.2",
-        "@tailwindcss/vite": "^4.1.18",
-        "@types/canvas-confetti": "^1.9.0",
-        "astro": "^5.16.6",
+        "@astrojs/vercel": "11.0.12",
+        "@tailwindcss/vite": "^4.3.3",
+        "astro": "^7.3.8",
         "canvas-confetti": "^1.9.4",
-        "tailwindcss": "^4.1.18"
+        "tailwindcss": "^4.3.3"
+    },
+    "devDependencies": {
+        "@astrojs/check": "^0.9.10",
+        "@playwright/test": "^1.64.0",
+        "@types/canvas-confetti": "^1.9.0",
+        "@types/node": "^24.0.0",
+        "stream-chain": "^4.2.6",
+        "stream-json": "3.7.0",
+        "typescript": "~5.9.3"
+    },
+    "pnpm": {
+        "overrides": {
+            "tar@7": "^7.5.22",
+            "rollup@4": "^4.64.5",
+            "ajv@6": "^6.15.0",
+            "picomatch@2": "^2.3.2",
+            "source-map-js": "^1.2.2",
+            "http-cache-semantics": "^4.3.0"
+        }
     }
 }

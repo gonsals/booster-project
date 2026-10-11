@@ -1,155 +1,62 @@
----
-import "@/styles/global.css";
+﻿---
 import MainLayout from "@/layouts/MainLayout.astro";
 import SetCard from "@/components/SetCard.astro";
-import SetCardSkeleton from "@/components/SetCardSkeleton.astro";
-import { getSetList } from "@/lib/setList";
-import type { SealedProduct } from "@/types/mtgjson/SealedProduct";
-import type { Set } from "@/types/mtgjson/Set";
-
-type BoosterFlags = {
-    play: boolean;
-    collector: boolean;
-};
-
-export async function getStaticPaths({ paginate }: { paginate: any }) {
-    const { data = [] } = await getSetList();
-
-    function getBoosterTypes(sealed: SealedProduct[] = []): BoosterFlags {
-        return {
-            play: sealed.some(
-                (p) =>
-                    /play|draft/i.test(p.name) ||
-                    /play|draft/i.test(p.subtype ?? "")
-            ),
-            collector: sealed.some((p) => /collector/i.test(p.name)),
-        };
-    }
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const items = data
-        .filter((s) => Array.isArray(s.sealedProduct) && s.sealedProduct.length)
-        .map((s) => {
-            const release = new Date(s.releaseDate);
-            release.setHours(0, 0, 0, 0);
-
-            const boosters = getBoosterTypes(s.sealedProduct);
-
-            return {
-                name: s.name,
-                code: s.code.toLowerCase(),
-                releaseDate: s.releaseDate,
-                isUpcoming: release > today,
-                boosters,
-            };
-        })
-        .filter((s) => s.boosters.play || s.boosters.collector)
-        .sort(
-            (a, b) =>
-                new Date(b.releaseDate).getTime() -
-                new Date(a.releaseDate).getTime()
-        );
-
-    return paginate(items, { pageSize: 18 });
-}
-
-const { page } = Astro.props as { page: any };
-const items = page?.data ?? ([] as Set[]);
-const isLoading = !items.length;
+import { buildCatalog, getSetList, type CatalogSet } from "@/lib/setList";
+const query = (Astro.url.searchParams.get("q") ?? "").trim().slice(0, 100);
+const type = Astro.url.searchParams.get("booster") ?? "";
+const rawPage = Astro.params.page ?? "1";
+const currentPage = Number(rawPage);
+let catalog: CatalogSet[] = [];
+let date = "";
+let error = false;
+try { const result = await getSetList(); catalog = buildCatalog(result.data); date = result.meta.date; }
+catch (cause) { console.error("Catalog unavailable", cause); error = true; Astro.response.status = 503; }
+const labels = { play: "Play Booster", draft: "Draft Booster", set: "Set Booster", collector: "Collector", jumpstart: "Jumpstart", theme: "Theme", other: "Especiales" };
+const needle = query.toLocaleLowerCase("es");
+const items = catalog.filter(s => (!needle || `${s.name} ${s.code}`.toLocaleLowerCase("es").includes(needle)) && (!type || s.boosters[type as keyof typeof labels]));
+const pageSize = 18;
+const lastPage = Math.max(1, Math.ceil(items.length / pageSize));
+const invalidPage = !/^[1-9]\d*$/.test(rawPage) || !Number.isSafeInteger(currentPage) || currentPage > lastPage;
+if (!error && invalidPage) Astro.response.status = 404;
+Astro.response.headers.set("Cache-Control", error || invalidPage ? "no-store" : "public, max-age=60, s-maxage=300");
+const start = (currentPage - 1) * pageSize;
+const visible = invalidPage ? [] : items.slice(start, start + pageSize);
+const upcoming = catalog.filter(s => s.isUpcoming).length;
+const pageUrl = (page: number) => { const params = new URLSearchParams(); if (query) params.set("q", query); if (type) params.set("booster", type); return `/sets/${page}${params.size ? `?${params}` : ""}`; };
 ---
-
-<html lang="en" transition:animate="fade">
-    <MainLayout content={{ title: `MTG TOP PICKS – Page ${page.currentPage}` }}>
-        <main class="mx-auto max-w-6xl p-6">
-            <!-- HEADER -->
-            <header
-                class="mb-6 flex flex-wrap items-center justify-between gap-4"
-            >
-                <div>
-                    <h1
-                        class="text-3xl font-extrabold tracking-tight text-gray-900"
-                    >
-                        Sets con Boosters
-                    </h1>
-                    <p class="mt-2 text-sm text-gray-600">
-                        Página {page.currentPage} de {page.lastPage} · Mostrando
-                        {page.start + 1}–{page.end} de {page.total}
-                    </p>
-                </div>
-
-                <a
-                    href="/"
-                    class="inline-flex items-center rounded-md border bg-white px-3 py-1.5 text-sm text-sky-700 hover:bg-sky-50"
-                >
-                    Inicio
-                </a>
-            </header>
-
-            <!-- GRID -->
-            <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {
-                    isLoading
-                        ? Array.from({ length: 6 }).map(() => (
-                              <SetCardSkeleton />
-                          ))
-                        : items.map((set: Set) => <SetCard set={set} />)
-                }
-            </section>
-
-            <!-- PAGINACIÓN -->
-            <nav class="mt-8 flex items-center justify-between text-sm">
-                <div class="flex gap-2">
-                    {
-                        page.url.first && (
-                            <a
-                                href={page.url.first}
-                                class="rounded border bg-white px-3 py-1 hover:bg-gray-50"
-                            >
-                                First
-                            </a>
-                        )
-                    }
-                    {
-                        page.url.prev && (
-                            <a
-                                href={page.url.prev}
-                                class="rounded border bg-white px-3 py-1 hover:bg-gray-50"
-                            >
-                                Prev
-                            </a>
-                        )
-                    }
-                </div>
-
-                <div class="text-gray-600">
-                    Página {page.currentPage} / {page.lastPage}
-                </div>
-
-                <div class="flex gap-2">
-                    {
-                        page.url.next && (
-                            <a
-                                href={page.url.next}
-                                class="rounded border bg-white px-3 py-1 hover:bg-gray-50"
-                            >
-                                Next
-                            </a>
-                        )
-                    }
-                    {
-                        page.url.last && (
-                            <a
-                                href={page.url.last}
-                                class="rounded border bg-white px-3 py-1 hover:bg-gray-50"
-                            >
-                                Last
-                            </a>
-                        )
-                    }
-                </div>
+<MainLayout content={{ title: "MTG Top Picks · Colecciones" }}>
+    <main class="page-shell">
+        <header class="catalog-hero">
+            <div>
+                <p class="eyebrow">Abre un mundo de posibilidades</p>
+                <h1 class="hero-title">Colecciones<br />con <em>sobres.</em></h1>
+                <p class="hero-copy">Tu próxima gran carta empieza aquí. Explora cada colección, descubre sus sobres y encuentra las impresiones que merece la pena coleccionar.</p>
+                {!error && <div class="hero-stats"><div class="hero-stat"><strong>{catalog.length}</strong><span>Colecciones para explorar</span></div><div class="hero-stat"><strong>{catalog.length - upcoming}</strong><span>Ya disponibles</span></div><div class="hero-stat"><strong>{upcoming}</strong><span>Próximos lanzamientos</span></div></div>}
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                {["EXPLORE", "YOUR NEXT PICK", "COLLECT"].map((label) => <div class="display-card"><div class="display-card-title"><span>{label}</span><span>✦</span></div><div class="display-card-art">✧</div><div class="display-card-line"></div><div class="display-card-line"></div><div class="display-card-line"></div></div>)}
+                <span class="art-caption">Cada sobre, una nueva historia</span>
+            </div>
+        </header>
+        <div class="catalog-tools">
+            <form action="/sets/1" method="get" class="search-form" role="search">
+                <div class="search-field"><label for="set-search" class="field-label">Buscar colección o código</label><input id="set-search" name="q" type="search" value={query} maxlength="100" placeholder="Busca tu próxima colección…" class="field w-full" /></div>
+                <div><label for="booster-type" class="field-label">Tipo de sobre</label><select name="booster" id="booster-type" class="field"><option value="" selected={!type}>Todos los tipos</option>{Object.entries(labels).map(([value, label]) => <option value={value} selected={type === value}>{label}</option>)}</select></div>
+                <button class="button-primary" type="submit">Buscar <span aria-hidden="true">↗</span></button>
+                {(query || type) && <a class="button-secondary" href="/sets/1">Limpiar</a>}
+            </form>
+        </div>
+        {error ? <section class="notice" role="alert"><h2 class="font-bold">No se pudo cargar el catálogo</h2><p class="mt-2">El proveedor de datos no está disponible. Vuelve a intentarlo en unos momentos.</p><a href={Astro.url.pathname + Astro.url.search} class="button-secondary mt-4">Reintentar</a></section>
+        : invalidPage ? <section class="notice"><h2 class="font-bold">Esta página no existe</h2><a class="button-secondary mt-4" href={pageUrl(1)}>Volver al catálogo</a></section>
+        : items.length === 0 ? <section class="notice"><h2 class="font-bold">No hay colecciones para estos filtros</h2><p class="mt-2">Prueba con otro nombre, código o tipo de sobre.</p><a class="button-secondary mt-4" href="/sets/1">Ver todas las colecciones</a></section>
+        : <>
+            <div class="catalog-results-header"><div><h2 class="section-title">{query || type ? "Tu selección" : "Explora el multiverso"}</h2><p class="result-meta mt-2">Mostrando {start + 1}–{Math.min(start + pageSize, items.length)} de {items.length} colecciones</p></div>{date && <p class="result-meta"><i class="update-dot"></i>Datos actualizados · <time datetime={date}>{date}</time></p>}</div>
+            <section class="catalog-grid" aria-label="Colecciones">{visible.map((set) => <SetCard set={set} />)}</section>
+            <nav aria-label="Paginación" class="pagination">
+                <div class="pagination-group">{currentPage > 1 && <><a class="button-secondary" href={pageUrl(1)}>Primera</a><a class="button-secondary" rel="prev" href={pageUrl(currentPage - 1)}>Anterior</a></>}</div>
+                <span class="result-meta">Página {currentPage} de {lastPage}</span>
+                <div class="pagination-group">{currentPage < lastPage && <><a class="button-secondary" rel="next" href={pageUrl(currentPage + 1)}>Siguiente</a><a class="button-secondary" href={pageUrl(lastPage)}>Última</a></>}</div>
             </nav>
-        </main>
-    </MainLayout>
-</html>
+        </>}
+    </main>
+</MainLayout>

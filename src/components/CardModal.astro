@@ -1,0 +1,133 @@
+---
+import type { CardDetail } from "@/lib/cardDetails";
+interface Props { cards: CardDetail[]; booster: string; date: string; approximate: boolean; products: { key: string; label: string }[] }
+const payload = JSON.stringify(Astro.props).replace(/</g, "\\u003c");
+---
+<script id="card-detail-data" type="application/json" set:html={payload} />
+<dialog id="card-modal" class="card-modal" aria-labelledby="modal-card-name" aria-describedby="modal-card-caption">
+    <button type="button" class="modal-close" aria-label="Cerrar detalles">✕</button>
+    <div class="modal-layout">
+        <div class="modal-visual"><img id="modal-card-image" alt="" width="488" height="680" /><button id="modal-flip" type="button" class="button-secondary" hidden>Ver reverso</button><p id="modal-artist"></p></div>
+        <div class="modal-content">
+            <p class="eyebrow">Tu posible próxima carta</p><h2 id="modal-card-name"></h2><p id="modal-card-caption" class="modal-caption"></p>
+            <section class="modal-odds" aria-labelledby="modal-odds-title">
+                <label for="modal-product" class="field-label">Sobre que vas a abrir</label><select id="modal-product" class="field w-full"></select>
+                <div class="odds-head"><div><h3 id="modal-odds-title">Probabilidad estimada</h3><strong id="modal-chance">—</strong></div><span id="modal-ratio"></span></div>
+                <div class="odds-track" aria-hidden="true"><span id="modal-chance-bar"></span></div><p id="modal-odds-caption" class="odds-caption"></p><div id="modal-finish-odds" class="finish-odds"></div>
+            </section>
+            <section class="modal-prices" aria-labelledby="modal-prices-title"><h3 id="modal-prices-title">Valor de esta impresión</h3><div id="modal-prices" class="modal-price-grid"></div><p class="modal-fineprint">Referencia en USD de Scryfall. El estado, idioma y mercado pueden cambiar el precio.</p></section>
+            <section id="modal-rules" class="modal-rules" aria-label="Información de la carta"></section>
+            <details class="modal-method"><summary>Cómo se estima y en qué sobres aparece</summary><p>Se ponderan las variantes del sobre y los pesos de sus posiciones. El porcentaje indica la posibilidad de obtener al menos una copia de esta impresión en un sobre, considerando todos sus acabados.</p><p>Es una estimación basada en MTGJSON. La distribución física, el equilibrio de colores y las correlaciones entre posiciones pueden variar. «1 de cada…» expresa una frecuencia media, no una garantía.</p><div id="modal-products"></div><p id="modal-data-date"></p></details>
+            <div class="modal-links"><a id="modal-scryfall" class="button-secondary" target="_blank" rel="noopener noreferrer">Ver en Scryfall ↗</a><span id="modal-rank"></span></div>
+        </div>
+    </div>
+</dialog>
+<script>
+    import { finishLabels, percentage, type CardDetail } from "../lib/cardDetails";
+    type Payload = { cards: CardDetail[]; booster: string; date: string; approximate: boolean; products: { key: string; label: string }[] };
+    const usd = new Intl.NumberFormat("es", { style: "currency", currency: "USD" });
+    const rarity: Record<string, string> = { common: "Común", uncommon: "Infrecuente", rare: "Rara", mythic: "Mítica", special: "Especial", bonus: "Bonus" };
+    let current: CardDetail | undefined;
+    let payload: Payload | undefined;
+    let sourceNode: HTMLElement | null = null;
+    let trigger: HTMLElement | undefined;
+    let face = 0;
+    const node = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+    const text = (id: string, value: string) => { node(id).textContent = value; };
+    const element = (tag: string, content = "", className = "") => { const el = document.createElement(tag); el.textContent = content; el.className = className; return el; };
+    function showImage() {
+        if (!current) return;
+        const image = node<HTMLImageElement>("modal-card-image");
+        const info = current.images[face];
+        image.hidden = !info;
+        if (info) { image.src = info.url; image.alt = info.name; } else image.removeAttribute("src");
+        node("modal-flip").hidden = current.images.length < 2;
+        text("modal-flip", face ? "Ver frontal" : "Ver reverso");
+    }
+    function showOdds() {
+        if (!current || !payload) return;
+        const key = node<HTMLSelectElement>("modal-product").value;
+        const product = current.products.find(p => p.key === key);
+        const odds = product?.odds;
+        node("modal-finish-odds").replaceChildren();
+        text("modal-chance", odds ? percentage(odds.chance) : product ? "—" : "0 %");
+        text("modal-ratio", odds && odds.chance > 0 ? odds.chance >= .999999 ? "En cada sobre de este modelo" : `Aprox. 1 de cada ${new Intl.NumberFormat("es", { maximumFractionDigits: odds.chance > .5 ? 1 : 0 }).format(1 / odds.chance)} sobres` : "");
+        node("modal-chance-bar").style.width = `${(odds?.chance ?? 0) * 100}%`;
+        text("modal-odds-caption", !product ? "Esta impresión no aparece en este tipo de sobre según la composición publicada."
+            : !odds ? "Composición provisional: todavía no hay datos suficientes para calcular una probabilidad."
+            : "Posibilidad de encontrar al menos una copia de esta impresión, en cualquiera de sus acabados.");
+        if (odds) {
+            for (const [finish, value] of Object.entries(odds.finishes)) {
+                if (!value) continue;
+                node("modal-finish-odds").append(element("span", `${finishLabels[finish as keyof typeof finishLabels]} · ${percentage(value.chance)}`));
+            }
+        }
+        // Highlight prices for the selected product; keep other finishes visible for comparison.
+        for (const el of node("modal-prices").children) {
+            const finish = (el as HTMLElement).dataset.finish;
+            el.classList.toggle("is-available", !!product?.finishes.includes(finish as keyof typeof finishLabels));
+        }
+    }
+    function open(id: string, from: HTMLElement) {
+        const data = node("card-detail-data");
+        if (!data) return;
+        if (sourceNode !== data) { payload = JSON.parse(data.textContent ?? "{}"); sourceNode = data; }
+        current = payload?.cards.find(c => c.id === id);
+        if (!current || !payload) return;
+        trigger = from; face = 0;
+        text("modal-card-name", current.name);
+        text("modal-card-caption", `${current.setName ?? current.set.toUpperCase()} · #${current.number} · ${rarity[current.rarity] ?? current.rarity}`);
+        text("modal-artist", current.artist ? `Ilustración de ${current.artist}` : "");
+        showImage();
+        const select = node<HTMLSelectElement>("modal-product");
+        select.replaceChildren(...(payload.products.length ? payload.products : [{ key: "provisional", label: "Selección provisional" }]).map(p => new Option(p.label, p.key)));
+        const preferred = payload.booster === "standard" ? current.products.find(p => /^(play|draft|set|default)$/.test(p.key))?.key
+            : current.products.some(p => p.key === payload!.booster) ? payload.booster
+            : ["play", "draft", "set", "default", "collector", "jumpstart"].find(k => current!.products.some(p => p.key === k)) ?? current.products[0]?.key;
+        if (preferred) select.value = preferred;
+        node("modal-prices").replaceChildren(...current.prices.map(p => {
+            const tile = element("div", "", "modal-price-tile"); tile.dataset.finish = p.finish;
+            tile.append(element("span", finishLabels[p.finish]), element("strong", p.price === null ? "Sin precio" : usd.format(p.price)));
+            if (!p.confirmed) tile.append(element("small", "Acabado sin confirmar"));
+            return tile;
+        }));
+        node("modal-rules").replaceChildren();
+        const faces = current.faces?.length ? current.faces : [{ name: "", type: current.type, mana: current.mana, text: current.text }];
+        for (const f of faces) {
+            if (f.name && faces.length > 1) node("modal-rules").append(element("h3", f.name));
+            if (f.type || f.mana) node("modal-rules").append(element("p", [f.type, f.mana].filter(Boolean).join(" · "), "rule-type"));
+            if (f.text) node("modal-rules").append(element("p", f.text, "oracle-text"));
+        }
+        if (current.power != null) node("modal-rules").append(element("p", `${current.power}/${current.toughness ?? "—"}`, "rule-type"));
+        node("modal-products").replaceChildren(...current.products.map(p => {
+            const row = element("div", "", "product-odds-row"); row.append(element("span", p.label), element("strong", p.odds ? percentage(p.odds.chance) : "Sin datos")); return row;
+        }));
+        text("modal-data-date", `Composición publicada: ${payload.date}`);
+        node<HTMLAnchorElement>("modal-scryfall").href = current.url;
+        text("modal-rank", current.rank != null ? `EDHREC #${current.rank.toLocaleString("es")}` : "");
+        node<HTMLDialogElement>("card-modal").querySelectorAll("details").forEach(d => { d.open = false; });
+        showOdds();
+        const dialog = node<HTMLDialogElement>("card-modal"); dialog.showModal(); dialog.scrollTop = 0;
+        document.documentElement.classList.add("modal-open");
+    }
+    document.addEventListener("click", event => {
+        if (!(event.target instanceof Element)) return;
+        const explicit = event.target.closest<HTMLElement>("[data-open-card]");
+        const card = event.target.closest<HTMLElement>(".mtg-card[data-card-id]");
+        if (explicit) open(explicit.dataset.openCard!, explicit);
+        else if (card && !event.target.closest("a,button,details")) open(card.dataset.cardId!, card.querySelector<HTMLElement>("[data-open-card]") ?? card);
+        const dialog = node<HTMLDialogElement>("card-modal");
+        if (dialog && event.target.closest(".modal-close")) dialog.close();
+        if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); }
+        if (event.target.closest("#modal-flip") && current) { face = (face + 1) % current.images.length; showImage(); }
+    });
+    document.addEventListener("change", event => { if ((event.target as HTMLElement)?.id === "modal-product") showOdds(); });
+    function attach() {
+        node<HTMLDialogElement>("card-modal")?.addEventListener("close", () => { document.documentElement.classList.remove("modal-open"); trigger?.focus({ preventScroll: true }); });
+    }
+    document.addEventListener("astro:page-load", attach);
+    document.addEventListener("astro:before-swap", () => {
+        document.documentElement.classList.remove("modal-open");
+        current = undefined; payload = undefined; sourceNode = null; trigger = undefined;
+    });
+</script>

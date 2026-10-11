@@ -1,0 +1,5462 @@
+{
+  "generatedAt": "2026-10-10T16:22:08.747Z",
+  "sources": {
+    "mtgjson": "2026-10-10",
+    "scryfall": "2026-10-10T09:06:04.967+00:00",
+    "url": "https://data.scryfall.io/default-cards/default-cards-20261010090604.jsonl.gz"
+  },
+  "catalogSets": 200,
+  "exactSets": 188,
+  "boosterConfigurations": 677,
+  "cardMemberships": 170099,
+  "uniquePrintings": 75088,
+  "failures": [],
+  "dataWarnings": [
+    {
+      "code": "AKH",
+      "issue": "Source finish discrepancies",
+      "printings": [
+        {
+          "id": "b474378c-5fa8-418f-8d76-23e78003ed18",
+          "issues": [
+            "showdown: foil no confirmado por los datos de la impresión"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "CMR",
+      "issue": "Source finish discrepancies",
+      "printings": [
+        {
+          "id": "2f68b4de-271b-415f-ad8f-104981bb12ab",
+          "issues": [
+            "collector: etched no confirmado por los datos de la impresión",
+            "draft: etched no confirmado por los datos de la impresión"
+          ]
+        },
+        {
+          "id": "2de336a3-224f-49e0-b4ff-34bf3de398bf",
+          "issues": [
+            "collector: etched no confirmado por los datos de la impresión",
+            "draft: etched no confirmado por los datos de la impresión"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "HOU",
+      "issue": "Source finish discrepancies",
+      "printings": [
+        {
+          "id": "b474378c-5fa8-418f-8d76-23e78003ed18",
+          "issues": [
+            "showdown: foil no confirmado por los datos de la impresión"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "KLD",
+      "issue": "Source finish discrepancies",
+      "printings": [
+        {
+          "id": "b474378c-5fa8-418f-8d76-23e78003ed18",
+          "issues": [
+            "buyabox: foil no confirmado por los datos de la impresión",
+            "showdown: foil no confirmado por los datos de la impresión"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MBC",
+      "issue": "Source finish discrepancies",
+      "printings": [
+        {
+          "id": "4c2abf39-90f5-46c2-b52c-49f2f43fce22",
+          "issues": [
+            "draft: foil no confirmado por los datos de la impresión"
+          ]
+        },
+        {
+          "id": "b21ff8d7-4c3e-4634-bb6b-835ded25a6c7",
+          "issues": [
+            "draft: foil no confirmado por los datos de la impresión"
+          ]
+        },
+        {
+          "id": "f51d8822-1d4d-417c-a281-8b011b978de2",
+          "issues": [
+            "draft: foil no confirmado por los datos de la impresión"
+          ]
+        },
+        {
+          "id": "09dc5495-e992-4709-b04f-7ac980b6e99f",
+          "issues": [
+            "draft: nonfoil no confirmado por los datos de la impresión"
+          ]
+        },
+        {
+          "id": "24614006-d99f-44b6-8ec1-29b48a1713d0",
+          "issues": [
+            "draft: nonfoil no confirmado por los datos de la impresión"
+          ]
+        },
+        {
+          "id": "823f356c-0ca9-4880-9f84-b22e2891948b",
+          "issues": [
+            "draft: nonfoil no confirmado por los datos de la impresión"
+          ]
+        },
+        {
+          "id": "f28263e6-ee21-415e-b633-377af6f40d5b",
+          "issues": [
+            "draft: nonfoil no confirmado por los datos de la impresión"
+          ]
+        }
+      ]
+    },
+    {
+      "code": "SOI",
+      "issue": "Source finish discrepancies",
+      "printings": [
+        {
+          "id": "b474378c-5fa8-418f-8d76-23e78003ed18",
+          "issues": [
+            "draft: foil no confirmado por los datos de la impresión"
+          ]
+        }
+      ]
+    }
+  ],
+  "withoutCollation": [
+    {
+      "code": "mdd",
+      "name": "Marvel: Darkhold Destiny",
+      "upcoming": true
+    },
+    {
+      "code": "nau",
+      "name": "Nauctis: The Sunken Realm",
+      "upcoming": true
+    },
+    {
+      "code": "trk",
+      "name": "Star Trek",
+      "upcoming": true
+    },
+    {
+      "code": "dpa",
+      "name": "Duels of the Planeswalkers",
+      "upcoming": false
+    },
+    {
+      "code": "s00",
+      "name": "Starter 2000",
+      "upcoming": false
+    },
+    {
+      "code": "pelp",
+      "name": "European Land Program",
+      "upcoming": false
+    },
+    {
+      "code": "palp",
+      "name": "Asia Pacific Land Program",
+      "upcoming": false
+    },
+    {
+      "code": "parl",
+      "name": "Arena League 1996",
+      "upcoming": false
+    },
+    {
+      "code": "bchr",
+      "name": "Chronicles Foreign Black Border",
+      "upcoming": false
+    },
+    {
+      "code": "4bb",
+      "name": "Fourth Edition Foreign Black Border",
+      "upcoming": false
+    },
+    {
+      "code": "fbb",
+      "name": "Foreign Black Border",
+      "upcoming": false
+    },
+    {
+      "code": "fwb",
+      "name": "Foreign White Border",
+      "upcoming": false
+    }
+  ],
+  "results": [
+    {
+      "code": "10E",
+      "name": "Tenth Edition",
+      "boosterTypes": 1,
+      "printings": 508,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 508,
+          "rendered": 508
+        }
+      ]
+    },
+    {
+      "code": "2ED",
+      "name": "Unlimited Edition",
+      "boosterTypes": 2,
+      "printings": 302,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 302,
+          "rendered": 302
+        },
+        {
+          "key": "starter",
+          "expected": 302,
+          "rendered": 302
+        }
+      ]
+    },
+    {
+      "code": "2X2",
+      "name": "Double Masters 2022",
+      "boosterTypes": 2,
+      "printings": 577,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 576,
+          "rendered": 576
+        },
+        {
+          "key": "draft",
+          "expected": 412,
+          "rendered": 412
+        }
+      ]
+    },
+    {
+      "code": "2XM",
+      "name": "Double Masters",
+      "boosterTypes": 3,
+      "printings": 382,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 40,
+          "rendered": 40
+        },
+        {
+          "key": "draft",
+          "expected": 332,
+          "rendered": 332
+        },
+        {
+          "key": "vip",
+          "expected": 382,
+          "rendered": 382
+        }
+      ]
+    },
+    {
+      "code": "30A",
+      "name": "30th Anniversary Edition",
+      "boosterTypes": 1,
+      "printings": 594,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 594,
+          "rendered": 594
+        }
+      ]
+    },
+    {
+      "code": "3ED",
+      "name": "Revised Edition",
+      "boosterTypes": 2,
+      "printings": 306,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 306,
+          "rendered": 306
+        },
+        {
+          "key": "starter",
+          "expected": 306,
+          "rendered": 306
+        }
+      ]
+    },
+    {
+      "code": "4ED",
+      "name": "Fourth Edition",
+      "boosterTypes": 2,
+      "printings": 378,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 363,
+          "rendered": 363
+        },
+        {
+          "key": "starter",
+          "expected": 378,
+          "rendered": 378
+        }
+      ]
+    },
+    {
+      "code": "5DN",
+      "name": "Fifth Dawn",
+      "boosterTypes": 2,
+      "printings": 185,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "5ED",
+      "name": "Fifth Edition",
+      "boosterTypes": 2,
+      "printings": 449,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 429,
+          "rendered": 429
+        },
+        {
+          "key": "starter",
+          "expected": 449,
+          "rendered": 449
+        }
+      ]
+    },
+    {
+      "code": "6ED",
+      "name": "Classic Sixth Edition",
+      "boosterTypes": 2,
+      "printings": 350,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 330,
+          "rendered": 330
+        },
+        {
+          "key": "tournament",
+          "expected": 350,
+          "rendered": 350
+        }
+      ]
+    },
+    {
+      "code": "7ED",
+      "name": "Seventh Edition",
+      "boosterTypes": 1,
+      "printings": 700,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 700,
+          "rendered": 700
+        }
+      ]
+    },
+    {
+      "code": "8ED",
+      "name": "Eighth Edition",
+      "boosterTypes": 1,
+      "printings": 700,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 700,
+          "rendered": 700
+        }
+      ]
+    },
+    {
+      "code": "9ED",
+      "name": "Ninth Edition",
+      "boosterTypes": 1,
+      "printings": 700,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 700,
+          "rendered": 700
+        }
+      ]
+    },
+    {
+      "code": "A25",
+      "name": "Masters 25",
+      "boosterTypes": 1,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "ACR",
+      "name": "Assassin's Creed",
+      "boosterTypes": 2,
+      "printings": 275,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 275,
+          "rendered": 275
+        },
+        {
+          "key": "default",
+          "expected": 154,
+          "rendered": 154
+        }
+      ]
+    },
+    {
+      "code": "AER",
+      "name": "Aether Revolt",
+      "boosterTypes": 2,
+      "printings": 277,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 223,
+          "rendered": 223
+        },
+        {
+          "key": "prerelease",
+          "expected": 54,
+          "rendered": 54
+        }
+      ]
+    },
+    {
+      "code": "AFR",
+      "name": "Adventures in the Forgotten Realms",
+      "boosterTypes": 12,
+      "printings": 1018,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 451,
+          "rendered": 451
+        },
+        {
+          "key": "draft",
+          "expected": 358,
+          "rendered": 358
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 187,
+          "rendered": 187
+        },
+        {
+          "key": "promo-foil",
+          "expected": 187,
+          "rendered": 187
+        },
+        {
+          "key": "set",
+          "expected": 658,
+          "rendered": 658
+        },
+        {
+          "key": "theme-b",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "theme-dungeons",
+          "expected": 50,
+          "rendered": 50
+        },
+        {
+          "key": "theme-g",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "theme-r",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "theme-u",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "theme-w",
+          "expected": 61,
+          "rendered": 61
+        }
+      ]
+    },
+    {
+      "code": "AKH",
+      "name": "Amonkhet",
+      "boosterTypes": 3,
+      "printings": 1721,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 299,
+          "rendered": 299
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "showdown",
+          "expected": 1623,
+          "rendered": 1623
+        }
+      ]
+    },
+    {
+      "code": "ALA",
+      "name": "Shards of Alara",
+      "boosterTypes": 3,
+      "printings": 539,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "premium",
+          "expected": 539,
+          "rendered": 539
+        },
+        {
+          "key": "tournament",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "ALL",
+      "name": "Alliances",
+      "boosterTypes": 1,
+      "printings": 199,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 199,
+          "rendered": 199
+        }
+      ]
+    },
+    {
+      "code": "APC",
+      "name": "Apocalypse",
+      "boosterTypes": 2,
+      "printings": 163,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "ARB",
+      "name": "Alara Reborn",
+      "boosterTypes": 2,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "six",
+          "expected": 165,
+          "rendered": 165
+        }
+      ]
+    },
+    {
+      "code": "ARN",
+      "name": "Arabian Nights",
+      "boosterTypes": 1,
+      "printings": 92,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 92,
+          "rendered": 92
+        }
+      ]
+    },
+    {
+      "code": "ATQ",
+      "name": "Antiquities",
+      "boosterTypes": 1,
+      "printings": 100,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 100,
+          "rendered": 100
+        }
+      ]
+    },
+    {
+      "code": "AVR",
+      "name": "Avacyn Restored",
+      "boosterTypes": 2,
+      "printings": 244,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 244,
+          "rendered": 244
+        },
+        {
+          "key": "six",
+          "expected": 244,
+          "rendered": 244
+        }
+      ]
+    },
+    {
+      "code": "BBD",
+      "name": "Battlebond",
+      "boosterTypes": 2,
+      "printings": 268,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 256,
+          "rendered": 256
+        },
+        {
+          "key": "prerelease",
+          "expected": 12,
+          "rendered": 12
+        }
+      ]
+    },
+    {
+      "code": "BFZ",
+      "name": "Battle for Zendikar",
+      "boosterTypes": 2,
+      "printings": 367,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 299,
+          "rendered": 299
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        }
+      ]
+    },
+    {
+      "code": "BLB",
+      "name": "Bloomburrow",
+      "boosterTypes": 7,
+      "printings": 712,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 446,
+          "rendered": 446
+        },
+        {
+          "key": "collector-sample",
+          "expected": 198,
+          "rendered": 198
+        },
+        {
+          "key": "play",
+          "expected": 352,
+          "rendered": 352
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "value",
+          "expected": 352,
+          "rendered": 352
+        }
+      ]
+    },
+    {
+      "code": "BNG",
+      "name": "Born of the Gods",
+      "boosterTypes": 6,
+      "printings": 190,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 185,
+          "rendered": 185
+        },
+        {
+          "key": "prerelease-conquer",
+          "expected": 35,
+          "rendered": 35
+        },
+        {
+          "key": "prerelease-dominate",
+          "expected": 35,
+          "rendered": 35
+        },
+        {
+          "key": "prerelease-lead",
+          "expected": 35,
+          "rendered": 35
+        },
+        {
+          "key": "prerelease-outwit",
+          "expected": 35,
+          "rendered": 35
+        },
+        {
+          "key": "prerelease-thrive",
+          "expected": 34,
+          "rendered": 34
+        }
+      ]
+    },
+    {
+      "code": "BOK",
+      "name": "Betrayers of Kamigawa",
+      "boosterTypes": 2,
+      "printings": 185,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "BRO",
+      "name": "The Brothers' War",
+      "boosterTypes": 10,
+      "printings": 1226,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "bundle-transformers",
+          "expected": 15,
+          "rendered": 15
+        },
+        {
+          "key": "collector",
+          "expected": 607,
+          "rendered": 607
+        },
+        {
+          "key": "collector-sample",
+          "expected": 193,
+          "rendered": 193
+        },
+        {
+          "key": "draft",
+          "expected": 411,
+          "rendered": 411
+        },
+        {
+          "key": "gift-bundle-transformers",
+          "expected": 15,
+          "rendered": 15
+        },
+        {
+          "key": "jumpstart",
+          "expected": 142,
+          "rendered": 142
+        },
+        {
+          "key": "prerelease",
+          "expected": 86,
+          "rendered": 86
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "set",
+          "expected": 773,
+          "rendered": 773
+        }
+      ]
+    },
+    {
+      "code": "CHK",
+      "name": "Champions of Kamigawa",
+      "boosterTypes": 3,
+      "printings": 307,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 307,
+          "rendered": 307
+        },
+        {
+          "key": "fat-pack",
+          "expected": 130,
+          "rendered": 130
+        },
+        {
+          "key": "tournament",
+          "expected": 307,
+          "rendered": 307
+        }
+      ]
+    },
+    {
+      "code": "CHR",
+      "name": "Chronicles",
+      "boosterTypes": 1,
+      "printings": 125,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 125,
+          "rendered": 125
+        }
+      ]
+    },
+    {
+      "code": "CLB",
+      "name": "Commander Legends: Battle for Baldur's Gate",
+      "boosterTypes": 5,
+      "printings": 1064,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 644,
+          "rendered": 644
+        },
+        {
+          "key": "collector-sample",
+          "expected": 155,
+          "rendered": 155
+        },
+        {
+          "key": "draft",
+          "expected": 450,
+          "rendered": 450
+        },
+        {
+          "key": "prerelease",
+          "expected": 99,
+          "rendered": 99
+        },
+        {
+          "key": "set",
+          "expected": 871,
+          "rendered": 871
+        }
+      ]
+    },
+    {
+      "code": "CLU",
+      "name": "Ravnica: Clue Edition",
+      "boosterTypes": 2,
+      "printings": 267,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 10,
+          "rendered": 10
+        },
+        {
+          "key": "default",
+          "expected": 257,
+          "rendered": 257
+        }
+      ]
+    },
+    {
+      "code": "CMM",
+      "name": "Commander Masters",
+      "boosterTypes": 4,
+      "printings": 1048,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 747,
+          "rendered": 747
+        },
+        {
+          "key": "collector-sample",
+          "expected": 117,
+          "rendered": 117
+        },
+        {
+          "key": "draft",
+          "expected": 518,
+          "rendered": 518
+        },
+        {
+          "key": "set",
+          "expected": 832,
+          "rendered": 832
+        }
+      ]
+    },
+    {
+      "code": "CMR",
+      "name": "Commander Legends",
+      "boosterTypes": 2,
+      "printings": 566,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 566,
+          "rendered": 566
+        },
+        {
+          "key": "draft",
+          "expected": 464,
+          "rendered": 464
+        }
+      ]
+    },
+    {
+      "code": "CN2",
+      "name": "Conspiracy: Take the Crown",
+      "boosterTypes": 1,
+      "printings": 222,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 222,
+          "rendered": 222
+        }
+      ]
+    },
+    {
+      "code": "CNS",
+      "name": "Conspiracy",
+      "boosterTypes": 1,
+      "printings": 210,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 210,
+          "rendered": 210
+        }
+      ]
+    },
+    {
+      "code": "CON",
+      "name": "Conflux",
+      "boosterTypes": 2,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "six",
+          "expected": 165,
+          "rendered": 165
+        }
+      ]
+    },
+    {
+      "code": "CSP",
+      "name": "Coldsnap",
+      "boosterTypes": 1,
+      "printings": 155,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 155,
+          "rendered": 155
+        }
+      ]
+    },
+    {
+      "code": "DBL",
+      "name": "Innistrad: Double Feature",
+      "boosterTypes": 1,
+      "printings": 534,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 534,
+          "rendered": 534
+        }
+      ]
+    },
+    {
+      "code": "DFT",
+      "name": "Aetherdrift",
+      "boosterTypes": 7,
+      "printings": 849,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 137,
+          "rendered": 137
+        },
+        {
+          "key": "collector",
+          "expected": 431,
+          "rendered": 431
+        },
+        {
+          "key": "collector-sample",
+          "expected": 104,
+          "rendered": 104
+        },
+        {
+          "key": "play",
+          "expected": 385,
+          "rendered": 385
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        }
+      ]
+    },
+    {
+      "code": "DGM",
+      "name": "Dragon's Maze",
+      "boosterTypes": 2,
+      "printings": 191,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 166,
+          "rendered": 166
+        },
+        {
+          "key": "six",
+          "expected": 181,
+          "rendered": 181
+        }
+      ]
+    },
+    {
+      "code": "DIS",
+      "name": "Dissension",
+      "boosterTypes": 1,
+      "printings": 180,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 180,
+          "rendered": 180
+        }
+      ]
+    },
+    {
+      "code": "DKA",
+      "name": "Dark Ascension",
+      "boosterTypes": 2,
+      "printings": 173,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 173,
+          "rendered": 173
+        },
+        {
+          "key": "six",
+          "expected": 173,
+          "rendered": 173
+        }
+      ]
+    },
+    {
+      "code": "DMR",
+      "name": "Dominaria Remastered",
+      "boosterTypes": 2,
+      "printings": 456,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 456,
+          "rendered": 456
+        },
+        {
+          "key": "draft",
+          "expected": 456,
+          "rendered": 456
+        }
+      ]
+    },
+    {
+      "code": "DMU",
+      "name": "Dominaria United",
+      "boosterTypes": 9,
+      "printings": 1335,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 20,
+          "rendered": 20
+        },
+        {
+          "key": "collector",
+          "expected": 717,
+          "rendered": 717
+        },
+        {
+          "key": "collector-sample",
+          "expected": 126,
+          "rendered": 126
+        },
+        {
+          "key": "draft",
+          "expected": 336,
+          "rendered": 336
+        },
+        {
+          "key": "jumpstart",
+          "expected": 146,
+          "rendered": 146
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "set",
+          "expected": 673,
+          "rendered": 673
+        }
+      ]
+    },
+    {
+      "code": "DOM",
+      "name": "Dominaria",
+      "boosterTypes": 8,
+      "printings": 1737,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 269,
+          "rendered": 269
+        },
+        {
+          "key": "prerelease",
+          "expected": 94,
+          "rendered": 94
+        },
+        {
+          "key": "showdown",
+          "expected": 1643,
+          "rendered": 1643
+        },
+        {
+          "key": "theme-b",
+          "expected": 70,
+          "rendered": 70
+        },
+        {
+          "key": "theme-g",
+          "expected": 69,
+          "rendered": 69
+        },
+        {
+          "key": "theme-r",
+          "expected": 70,
+          "rendered": 70
+        },
+        {
+          "key": "theme-u",
+          "expected": 69,
+          "rendered": 69
+        },
+        {
+          "key": "theme-w",
+          "expected": 69,
+          "rendered": 69
+        }
+      ]
+    },
+    {
+      "code": "DRK",
+      "name": "The Dark",
+      "boosterTypes": 1,
+      "printings": 119,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 119,
+          "rendered": 119
+        }
+      ]
+    },
+    {
+      "code": "DSK",
+      "name": "Duskmourn: House of Horror",
+      "boosterTypes": 7,
+      "printings": 727,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 445,
+          "rendered": 445
+        },
+        {
+          "key": "collector-sample",
+          "expected": 170,
+          "rendered": 170
+        },
+        {
+          "key": "nightmare",
+          "expected": 6,
+          "rendered": 6
+        },
+        {
+          "key": "play",
+          "expected": 377,
+          "rendered": 377
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        }
+      ]
+    },
+    {
+      "code": "DST",
+      "name": "Darksteel",
+      "boosterTypes": 2,
+      "printings": 185,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "DTK",
+      "name": "Dragons of Tarkir",
+      "boosterTypes": 7,
+      "printings": 304,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 264,
+          "rendered": 264
+        },
+        {
+          "key": "fat-pack",
+          "expected": 116,
+          "rendered": 116
+        },
+        {
+          "key": "prerelease-atarka",
+          "expected": 55,
+          "rendered": 55
+        },
+        {
+          "key": "prerelease-dromoka",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "prerelease-kolaghan",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "prerelease-ojutai",
+          "expected": 52,
+          "rendered": 52
+        },
+        {
+          "key": "prerelease-silumgar",
+          "expected": 57,
+          "rendered": 57
+        }
+      ]
+    },
+    {
+      "code": "ECL",
+      "name": "Lorwyn Eclipsed",
+      "boosterTypes": 5,
+      "printings": 631,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 440,
+          "rendered": 440
+        },
+        {
+          "key": "play",
+          "expected": 371,
+          "rendered": 371
+        },
+        {
+          "key": "prerelease",
+          "expected": 87,
+          "rendered": 87
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        }
+      ]
+    },
+    {
+      "code": "ELD",
+      "name": "Throne of Eldraine",
+      "boosterTypes": 10,
+      "printings": 653,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 371,
+          "rendered": 371
+        },
+        {
+          "key": "draft",
+          "expected": 302,
+          "rendered": 302
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "theme-b",
+          "expected": 62,
+          "rendered": 62
+        },
+        {
+          "key": "theme-g",
+          "expected": 62,
+          "rendered": 62
+        },
+        {
+          "key": "theme-r",
+          "expected": 62,
+          "rendered": 62
+        },
+        {
+          "key": "theme-u",
+          "expected": 62,
+          "rendered": 62
+        },
+        {
+          "key": "theme-w",
+          "expected": 62,
+          "rendered": 62
+        }
+      ]
+    },
+    {
+      "code": "EMA",
+      "name": "Eternal Masters",
+      "boosterTypes": 1,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "EMN",
+      "name": "Eldritch Moon",
+      "boosterTypes": 2,
+      "printings": 281,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 220,
+          "rendered": 220
+        },
+        {
+          "key": "prerelease",
+          "expected": 61,
+          "rendered": 61
+        }
+      ]
+    },
+    {
+      "code": "EOE",
+      "name": "Edge of Eternities",
+      "boosterTypes": 6,
+      "printings": 872,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 596,
+          "rendered": 596
+        },
+        {
+          "key": "collector-sample",
+          "expected": 301,
+          "rendered": 301
+        },
+        {
+          "key": "play",
+          "expected": 371,
+          "rendered": 371
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        }
+      ]
+    },
+    {
+      "code": "EVE",
+      "name": "Eventide",
+      "boosterTypes": 1,
+      "printings": 180,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 180,
+          "rendered": 180
+        }
+      ]
+    },
+    {
+      "code": "EXO",
+      "name": "Exodus",
+      "boosterTypes": 1,
+      "printings": 143,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        }
+      ]
+    },
+    {
+      "code": "FDN",
+      "name": "Foundations",
+      "boosterTypes": 4,
+      "printings": 655,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "beginner",
+          "expected": 129,
+          "rendered": 129
+        },
+        {
+          "key": "collector",
+          "expected": 487,
+          "rendered": 487
+        },
+        {
+          "key": "play",
+          "expected": 371,
+          "rendered": 371
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        }
+      ]
+    },
+    {
+      "code": "FEM",
+      "name": "Fallen Empires",
+      "boosterTypes": 1,
+      "printings": 187,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 187,
+          "rendered": 187
+        }
+      ]
+    },
+    {
+      "code": "FIN",
+      "name": "Final Fantasy",
+      "boosterTypes": 7,
+      "printings": 891,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "bundle-promo",
+          "expected": 161,
+          "rendered": 161
+        },
+        {
+          "key": "chocobo-bundle",
+          "expected": 25,
+          "rendered": 25
+        },
+        {
+          "key": "chocobo-bundle-scene",
+          "expected": 24,
+          "rendered": 24
+        },
+        {
+          "key": "collector",
+          "expected": 744,
+          "rendered": 744
+        },
+        {
+          "key": "collector-sample",
+          "expected": 108,
+          "rendered": 108
+        },
+        {
+          "key": "play",
+          "expected": 485,
+          "rendered": 485
+        },
+        {
+          "key": "prerelease",
+          "expected": 94,
+          "rendered": 94
+        }
+      ]
+    },
+    {
+      "code": "FRA",
+      "name": "Reality Fracture",
+      "boosterTypes": 5,
+      "printings": 668,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 462,
+          "rendered": 462
+        },
+        {
+          "key": "play",
+          "expected": 411,
+          "rendered": 411
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "secret-lair-bundle-promo",
+          "expected": 10,
+          "rendered": 10
+        }
+      ]
+    },
+    {
+      "code": "FRF",
+      "name": "Fate Reforged",
+      "boosterTypes": 6,
+      "printings": 221,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 196,
+          "rendered": 196
+        },
+        {
+          "key": "prerelease-abzan",
+          "expected": 47,
+          "rendered": 47
+        },
+        {
+          "key": "prerelease-jeskai",
+          "expected": 53,
+          "rendered": 53
+        },
+        {
+          "key": "prerelease-mardu",
+          "expected": 45,
+          "rendered": 45
+        },
+        {
+          "key": "prerelease-sultai",
+          "expected": 49,
+          "rendered": 49
+        },
+        {
+          "key": "prerelease-temur",
+          "expected": 49,
+          "rendered": 49
+        }
+      ]
+    },
+    {
+      "code": "FUT",
+      "name": "Future Sight",
+      "boosterTypes": 1,
+      "printings": 180,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 180,
+          "rendered": 180
+        }
+      ]
+    },
+    {
+      "code": "GPT",
+      "name": "Guildpact",
+      "boosterTypes": 1,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        }
+      ]
+    },
+    {
+      "code": "GRN",
+      "name": "Guilds of Ravnica",
+      "boosterTypes": 12,
+      "printings": 1310,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 259,
+          "rendered": 259
+        },
+        {
+          "key": "prerelease-boros",
+          "expected": 62,
+          "rendered": 62
+        },
+        {
+          "key": "prerelease-dimir",
+          "expected": 62,
+          "rendered": 62
+        },
+        {
+          "key": "prerelease-golgari",
+          "expected": 59,
+          "rendered": 59
+        },
+        {
+          "key": "prerelease-izzet",
+          "expected": 56,
+          "rendered": 56
+        },
+        {
+          "key": "prerelease-selesnya",
+          "expected": 62,
+          "rendered": 62
+        },
+        {
+          "key": "showdown",
+          "expected": 1270,
+          "rendered": 1270
+        },
+        {
+          "key": "theme-boros",
+          "expected": 79,
+          "rendered": 79
+        },
+        {
+          "key": "theme-dimir",
+          "expected": 79,
+          "rendered": 79
+        },
+        {
+          "key": "theme-golgari",
+          "expected": 75,
+          "rendered": 75
+        },
+        {
+          "key": "theme-izzet",
+          "expected": 70,
+          "rendered": 70
+        },
+        {
+          "key": "theme-selesnya",
+          "expected": 79,
+          "rendered": 79
+        }
+      ]
+    },
+    {
+      "code": "GTC",
+      "name": "Gatecrash",
+      "boosterTypes": 7,
+      "printings": 274,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 274,
+          "rendered": 274
+        },
+        {
+          "key": "prerelease-boros",
+          "expected": 73,
+          "rendered": 73
+        },
+        {
+          "key": "prerelease-dimir",
+          "expected": 73,
+          "rendered": 73
+        },
+        {
+          "key": "prerelease-gruul",
+          "expected": 73,
+          "rendered": 73
+        },
+        {
+          "key": "prerelease-orzhov",
+          "expected": 73,
+          "rendered": 73
+        },
+        {
+          "key": "prerelease-simic",
+          "expected": 73,
+          "rendered": 73
+        },
+        {
+          "key": "six",
+          "expected": 274,
+          "rendered": 274
+        }
+      ]
+    },
+    {
+      "code": "HML",
+      "name": "Homelands",
+      "boosterTypes": 1,
+      "printings": 140,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 140,
+          "rendered": 140
+        }
+      ]
+    },
+    {
+      "code": "HOB",
+      "name": "The Hobbit",
+      "boosterTypes": 4,
+      "printings": 418,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 40,
+          "rendered": 40
+        },
+        {
+          "key": "collector",
+          "expected": 413,
+          "rendered": 413
+        },
+        {
+          "key": "play",
+          "expected": 248,
+          "rendered": 248
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        }
+      ]
+    },
+    {
+      "code": "HOU",
+      "name": "Hour of Devastation",
+      "boosterTypes": 3,
+      "printings": 1825,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 223,
+          "rendered": 223
+        },
+        {
+          "key": "prerelease",
+          "expected": 54,
+          "rendered": 54
+        },
+        {
+          "key": "showdown",
+          "expected": 1737,
+          "rendered": 1737
+        }
+      ]
+    },
+    {
+      "code": "ICE",
+      "name": "Ice Age",
+      "boosterTypes": 2,
+      "printings": 383,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 363,
+          "rendered": 363
+        },
+        {
+          "key": "starter",
+          "expected": 383,
+          "rendered": 383
+        }
+      ]
+    },
+    {
+      "code": "IKO",
+      "name": "Ikoria: Lair of Behemoths",
+      "boosterTypes": 15,
+      "printings": 714,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 15,
+          "rendered": 15
+        },
+        {
+          "key": "box-topper-jp",
+          "expected": 18,
+          "rendered": 18
+        },
+        {
+          "key": "collector",
+          "expected": 449,
+          "rendered": 449
+        },
+        {
+          "key": "collector-jp",
+          "expected": 452,
+          "rendered": 452
+        },
+        {
+          "key": "draft",
+          "expected": 312,
+          "rendered": 312
+        },
+        {
+          "key": "jp",
+          "expected": 330,
+          "rendered": 330
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "theme-b",
+          "expected": 42,
+          "rendered": 42
+        },
+        {
+          "key": "theme-g",
+          "expected": 43,
+          "rendered": 43
+        },
+        {
+          "key": "theme-monsters",
+          "expected": 218,
+          "rendered": 218
+        },
+        {
+          "key": "theme-r",
+          "expected": 43,
+          "rendered": 43
+        },
+        {
+          "key": "theme-u",
+          "expected": 42,
+          "rendered": 42
+        },
+        {
+          "key": "theme-w",
+          "expected": 43,
+          "rendered": 43
+        }
+      ]
+    },
+    {
+      "code": "IMA",
+      "name": "Iconic Masters",
+      "boosterTypes": 1,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "INR",
+      "name": "Innistrad Remastered",
+      "boosterTypes": 2,
+      "printings": 491,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 491,
+          "rendered": 491
+        },
+        {
+          "key": "play",
+          "expected": 480,
+          "rendered": 480
+        }
+      ]
+    },
+    {
+      "code": "INV",
+      "name": "Invasion",
+      "boosterTypes": 3,
+      "printings": 350,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 350,
+          "rendered": 350
+        },
+        {
+          "key": "fat-pack",
+          "expected": 130,
+          "rendered": 130
+        },
+        {
+          "key": "tournament",
+          "expected": 350,
+          "rendered": 350
+        }
+      ]
+    },
+    {
+      "code": "ISD",
+      "name": "Innistrad",
+      "boosterTypes": 2,
+      "printings": 264,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 264,
+          "rendered": 264
+        },
+        {
+          "key": "six",
+          "expected": 264,
+          "rendered": 264
+        }
+      ]
+    },
+    {
+      "code": "J22",
+      "name": "Jumpstart 2022",
+      "boosterTypes": 1,
+      "printings": 834,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "jumpstart",
+          "expected": 834,
+          "rendered": 834
+        }
+      ]
+    },
+    {
+      "code": "J25",
+      "name": "Foundations Jumpstart",
+      "boosterTypes": 1,
+      "printings": 779,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "jumpstart",
+          "expected": 779,
+          "rendered": 779
+        }
+      ]
+    },
+    {
+      "code": "JMP",
+      "name": "Jumpstart",
+      "boosterTypes": 1,
+      "printings": 665,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "jumpstart",
+          "expected": 665,
+          "rendered": 665
+        }
+      ]
+    },
+    {
+      "code": "JOU",
+      "name": "Journey into Nyx",
+      "boosterTypes": 6,
+      "printings": 200,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 195,
+          "rendered": 195
+        },
+        {
+          "key": "prerelease-glory",
+          "expected": 36,
+          "rendered": 36
+        },
+        {
+          "key": "prerelease-intellect",
+          "expected": 36,
+          "rendered": 36
+        },
+        {
+          "key": "prerelease-pursuit",
+          "expected": 35,
+          "rendered": 35
+        },
+        {
+          "key": "prerelease-tyranny",
+          "expected": 36,
+          "rendered": 36
+        },
+        {
+          "key": "prerelease-war",
+          "expected": 36,
+          "rendered": 36
+        }
+      ]
+    },
+    {
+      "code": "JUD",
+      "name": "Judgment",
+      "boosterTypes": 2,
+      "printings": 163,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "KHM",
+      "name": "Kaldheim",
+      "boosterTypes": 12,
+      "printings": 988,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 394,
+          "rendered": 394
+        },
+        {
+          "key": "draft",
+          "expected": 333,
+          "rendered": 333
+        },
+        {
+          "key": "prerelease",
+          "expected": 85,
+          "rendered": 85
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "set",
+          "expected": 638,
+          "rendered": 638
+        },
+        {
+          "key": "theme-b",
+          "expected": 59,
+          "rendered": 59
+        },
+        {
+          "key": "theme-g",
+          "expected": 55,
+          "rendered": 55
+        },
+        {
+          "key": "theme-r",
+          "expected": 58,
+          "rendered": 58
+        },
+        {
+          "key": "theme-u",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "theme-vikings",
+          "expected": 160,
+          "rendered": 160
+        },
+        {
+          "key": "theme-w",
+          "expected": 60,
+          "rendered": 60
+        }
+      ]
+    },
+    {
+      "code": "KLD",
+      "name": "Kaladesh",
+      "boosterTypes": 4,
+      "printings": 1129,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "buyabox",
+          "expected": 1061,
+          "rendered": 1061
+        },
+        {
+          "key": "draft",
+          "expected": 294,
+          "rendered": 294
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "showdown",
+          "expected": 1061,
+          "rendered": 1061
+        }
+      ]
+    },
+    {
+      "code": "KTK",
+      "name": "Khans of Tarkir",
+      "boosterTypes": 6,
+      "printings": 309,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 269,
+          "rendered": 269
+        },
+        {
+          "key": "prerelease-abzan",
+          "expected": 65,
+          "rendered": 65
+        },
+        {
+          "key": "prerelease-jeskai",
+          "expected": 64,
+          "rendered": 64
+        },
+        {
+          "key": "prerelease-mardu",
+          "expected": 65,
+          "rendered": 65
+        },
+        {
+          "key": "prerelease-sultai",
+          "expected": 64,
+          "rendered": 64
+        },
+        {
+          "key": "prerelease-temur",
+          "expected": 62,
+          "rendered": 62
+        }
+      ]
+    },
+    {
+      "code": "LCI",
+      "name": "The Lost Caverns of Ixalan",
+      "boosterTypes": 11,
+      "printings": 1026,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 20,
+          "rendered": 20
+        },
+        {
+          "key": "box-topper-foil",
+          "expected": 20,
+          "rendered": 20
+        },
+        {
+          "key": "bundle-promo",
+          "expected": 20,
+          "rendered": 20
+        },
+        {
+          "key": "bundle-promo-foil",
+          "expected": 20,
+          "rendered": 20
+        },
+        {
+          "key": "collector",
+          "expected": 517,
+          "rendered": 517
+        },
+        {
+          "key": "collector-sample",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "draft",
+          "expected": 352,
+          "rendered": 352
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "set",
+          "expected": 622,
+          "rendered": 622
+        }
+      ]
+    },
+    {
+      "code": "LEA",
+      "name": "Limited Edition Alpha",
+      "boosterTypes": 2,
+      "printings": 295,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 295,
+          "rendered": 295
+        },
+        {
+          "key": "starter",
+          "expected": 295,
+          "rendered": 295
+        }
+      ]
+    },
+    {
+      "code": "LEB",
+      "name": "Limited Edition Beta",
+      "boosterTypes": 2,
+      "printings": 302,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 302,
+          "rendered": 302
+        },
+        {
+          "key": "starter",
+          "expected": 302,
+          "rendered": 302
+        }
+      ]
+    },
+    {
+      "code": "LEG",
+      "name": "Legends",
+      "boosterTypes": 1,
+      "printings": 310,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 310,
+          "rendered": 310
+        }
+      ]
+    },
+    {
+      "code": "LGN",
+      "name": "Legions",
+      "boosterTypes": 2,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 145,
+          "rendered": 145
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "LRW",
+      "name": "Lorwyn",
+      "boosterTypes": 2,
+      "printings": 301,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 301,
+          "rendered": 301
+        },
+        {
+          "key": "tournament",
+          "expected": 301,
+          "rendered": 301
+        }
+      ]
+    },
+    {
+      "code": "LTR",
+      "name": "The Lord of the Rings: Tales of Middle-earth",
+      "boosterTypes": 9,
+      "printings": 1552,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 30,
+          "rendered": 30
+        },
+        {
+          "key": "collector",
+          "expected": 563,
+          "rendered": 563
+        },
+        {
+          "key": "collector-sample",
+          "expected": 250,
+          "rendered": 250
+        },
+        {
+          "key": "collector-special",
+          "expected": 605,
+          "rendered": 605
+        },
+        {
+          "key": "draft",
+          "expected": 368,
+          "rendered": 368
+        },
+        {
+          "key": "jumpstart",
+          "expected": 126,
+          "rendered": 126
+        },
+        {
+          "key": "jumpstart-v2",
+          "expected": 134,
+          "rendered": 134
+        },
+        {
+          "key": "prerelease",
+          "expected": 86,
+          "rendered": 86
+        },
+        {
+          "key": "set",
+          "expected": 681,
+          "rendered": 681
+        }
+      ]
+    },
+    {
+      "code": "M10",
+      "name": "Magic 2010",
+      "boosterTypes": 2,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "six",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "M11",
+      "name": "Magic 2011",
+      "boosterTypes": 2,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "six",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "M12",
+      "name": "Magic 2012",
+      "boosterTypes": 2,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "six",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "M13",
+      "name": "Magic 2013",
+      "boosterTypes": 3,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "duelspromo",
+          "expected": 161,
+          "rendered": 161
+        },
+        {
+          "key": "six",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "M14",
+      "name": "Magic 2014",
+      "boosterTypes": 3,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "duelspromo",
+          "expected": 161,
+          "rendered": 161
+        },
+        {
+          "key": "six",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "M15",
+      "name": "Magic 2015",
+      "boosterTypes": 7,
+      "printings": 274,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 269,
+          "rendered": 269
+        },
+        {
+          "key": "duelspromo",
+          "expected": 181,
+          "rendered": 181
+        },
+        {
+          "key": "prerelease-ambition",
+          "expected": 74,
+          "rendered": 74
+        },
+        {
+          "key": "prerelease-ferocity",
+          "expected": 75,
+          "rendered": 75
+        },
+        {
+          "key": "prerelease-guile",
+          "expected": 75,
+          "rendered": 75
+        },
+        {
+          "key": "prerelease-strength",
+          "expected": 75,
+          "rendered": 75
+        },
+        {
+          "key": "prerelease-valor",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "M19",
+      "name": "Core Set 2019",
+      "boosterTypes": 3,
+      "printings": 1997,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 280,
+          "rendered": 280
+        },
+        {
+          "key": "prerelease",
+          "expected": 69,
+          "rendered": 69
+        },
+        {
+          "key": "showdown",
+          "expected": 1927,
+          "rendered": 1927
+        }
+      ]
+    },
+    {
+      "code": "M20",
+      "name": "Core Set 2020",
+      "boosterTypes": 9,
+      "printings": 583,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 280,
+          "rendered": 280
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "promo",
+          "expected": 235,
+          "rendered": 235
+        },
+        {
+          "key": "promo-foil",
+          "expected": 235,
+          "rendered": 235
+        },
+        {
+          "key": "theme-b",
+          "expected": 65,
+          "rendered": 65
+        },
+        {
+          "key": "theme-g",
+          "expected": 65,
+          "rendered": 65
+        },
+        {
+          "key": "theme-r",
+          "expected": 65,
+          "rendered": 65
+        },
+        {
+          "key": "theme-u",
+          "expected": 65,
+          "rendered": 65
+        },
+        {
+          "key": "theme-w",
+          "expected": 65,
+          "rendered": 65
+        }
+      ]
+    },
+    {
+      "code": "M21",
+      "name": "Core Set 2021",
+      "boosterTypes": 5,
+      "printings": 633,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 368,
+          "rendered": 368
+        },
+        {
+          "key": "draft",
+          "expected": 318,
+          "rendered": 318
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        }
+      ]
+    },
+    {
+      "code": "MAT",
+      "name": "March of the Machine: The Aftermath",
+      "boosterTypes": 2,
+      "printings": 228,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 213,
+          "rendered": 213
+        },
+        {
+          "key": "default",
+          "expected": 100,
+          "rendered": 100
+        }
+      ]
+    },
+    {
+      "code": "MB1",
+      "name": "Mystery Booster",
+      "boosterTypes": 3,
+      "printings": 2060,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "convention",
+          "expected": 1815,
+          "rendered": 1815
+        },
+        {
+          "key": "convention-2021",
+          "expected": 1791,
+          "rendered": 1791
+        },
+        {
+          "key": "draft",
+          "expected": 1815,
+          "rendered": 1815
+        }
+      ]
+    },
+    {
+      "code": "MB2",
+      "name": "Mystery Booster 2",
+      "boosterTypes": 1,
+      "printings": 1836,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 1836,
+          "rendered": 1836
+        }
+      ]
+    },
+    {
+      "code": "MBC",
+      "name": "Mystery Booster Commander Edition",
+      "boosterTypes": 1,
+      "printings": 2346,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 2346,
+          "rendered": 2343
+        }
+      ]
+    },
+    {
+      "code": "MBS",
+      "name": "Mirrodin Besieged",
+      "boosterTypes": 4,
+      "printings": 155,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 155,
+          "rendered": 155
+        },
+        {
+          "key": "mirran",
+          "expected": 155,
+          "rendered": 155
+        },
+        {
+          "key": "phyrexian",
+          "expected": 155,
+          "rendered": 155
+        },
+        {
+          "key": "six",
+          "expected": 155,
+          "rendered": 155
+        }
+      ]
+    },
+    {
+      "code": "MH1",
+      "name": "Modern Horizons",
+      "boosterTypes": 1,
+      "printings": 254,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 254,
+          "rendered": 254
+        }
+      ]
+    },
+    {
+      "code": "MH2",
+      "name": "Modern Horizons 2",
+      "boosterTypes": 4,
+      "printings": 910,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 450,
+          "rendered": 450
+        },
+        {
+          "key": "draft",
+          "expected": 441,
+          "rendered": 441
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "set",
+          "expected": 751,
+          "rendered": 751
+        }
+      ]
+    },
+    {
+      "code": "MH3",
+      "name": "Modern Horizons 3",
+      "boosterTypes": 4,
+      "printings": 691,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 593,
+          "rendered": 593
+        },
+        {
+          "key": "collector-sample",
+          "expected": 178,
+          "rendered": 178
+        },
+        {
+          "key": "play",
+          "expected": 472,
+          "rendered": 472
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        }
+      ]
+    },
+    {
+      "code": "MID",
+      "name": "Innistrad: Midnight Hunt",
+      "boosterTypes": 12,
+      "printings": 1005,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 417,
+          "rendered": 417
+        },
+        {
+          "key": "draft",
+          "expected": 325,
+          "rendered": 325
+        },
+        {
+          "key": "prerelease",
+          "expected": 84,
+          "rendered": 84
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "set",
+          "expected": 635,
+          "rendered": 635
+        },
+        {
+          "key": "theme-b",
+          "expected": 54,
+          "rendered": 54
+        },
+        {
+          "key": "theme-g",
+          "expected": 51,
+          "rendered": 51
+        },
+        {
+          "key": "theme-r",
+          "expected": 51,
+          "rendered": 51
+        },
+        {
+          "key": "theme-u",
+          "expected": 51,
+          "rendered": 51
+        },
+        {
+          "key": "theme-w",
+          "expected": 50,
+          "rendered": 50
+        },
+        {
+          "key": "theme-werewolves",
+          "expected": 65,
+          "rendered": 65
+        }
+      ]
+    },
+    {
+      "code": "MIR",
+      "name": "Mirage",
+      "boosterTypes": 2,
+      "printings": 350,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 330,
+          "rendered": 330
+        },
+        {
+          "key": "starter",
+          "expected": 350,
+          "rendered": 350
+        }
+      ]
+    },
+    {
+      "code": "MKM",
+      "name": "Murders at Karlov Manor",
+      "boosterTypes": 6,
+      "printings": 797,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 478,
+          "rendered": 478
+        },
+        {
+          "key": "collector-sample",
+          "expected": 138,
+          "rendered": 138
+        },
+        {
+          "key": "play",
+          "expected": 427,
+          "rendered": 427
+        },
+        {
+          "key": "prerelease",
+          "expected": 93,
+          "rendered": 93
+        },
+        {
+          "key": "promo",
+          "expected": 176,
+          "rendered": 176
+        },
+        {
+          "key": "promo-foil",
+          "expected": 176,
+          "rendered": 176
+        }
+      ]
+    },
+    {
+      "code": "MM2",
+      "name": "Modern Masters 2015",
+      "boosterTypes": 1,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "MM3",
+      "name": "Modern Masters 2017",
+      "boosterTypes": 1,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "MMA",
+      "name": "Modern Masters",
+      "boosterTypes": 1,
+      "printings": 229,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 229,
+          "rendered": 229
+        }
+      ]
+    },
+    {
+      "code": "MMQ",
+      "name": "Mercadian Masques",
+      "boosterTypes": 3,
+      "printings": 350,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 350,
+          "rendered": 350
+        },
+        {
+          "key": "fat-pack",
+          "expected": 21,
+          "rendered": 21
+        },
+        {
+          "key": "tournament",
+          "expected": 350,
+          "rendered": 350
+        }
+      ]
+    },
+    {
+      "code": "MOM",
+      "name": "March of the Machine",
+      "boosterTypes": 8,
+      "printings": 1292,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 685,
+          "rendered": 685
+        },
+        {
+          "key": "collector-sample",
+          "expected": 173,
+          "rendered": 173
+        },
+        {
+          "key": "draft",
+          "expected": 387,
+          "rendered": 387
+        },
+        {
+          "key": "jumpstart",
+          "expected": 115,
+          "rendered": 115
+        },
+        {
+          "key": "prerelease",
+          "expected": 86,
+          "rendered": 86
+        },
+        {
+          "key": "promo",
+          "expected": 158,
+          "rendered": 158
+        },
+        {
+          "key": "promo-foil",
+          "expected": 158,
+          "rendered": 158
+        },
+        {
+          "key": "set",
+          "expected": 821,
+          "rendered": 821
+        }
+      ]
+    },
+    {
+      "code": "MOR",
+      "name": "Morningtide",
+      "boosterTypes": 1,
+      "printings": 150,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 150,
+          "rendered": 150
+        }
+      ]
+    },
+    {
+      "code": "MRD",
+      "name": "Mirrodin",
+      "boosterTypes": 3,
+      "printings": 306,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 306,
+          "rendered": 306
+        },
+        {
+          "key": "fat-pack",
+          "expected": 130,
+          "rendered": 130
+        },
+        {
+          "key": "tournament",
+          "expected": 306,
+          "rendered": 306
+        }
+      ]
+    },
+    {
+      "code": "MSH",
+      "name": "Marvel Super Heroes",
+      "boosterTypes": 4,
+      "printings": 1000,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 960,
+          "rendered": 960
+        },
+        {
+          "key": "jumpstart",
+          "expected": 448,
+          "rendered": 448
+        },
+        {
+          "key": "play",
+          "expected": 444,
+          "rendered": 444
+        },
+        {
+          "key": "prerelease",
+          "expected": 85,
+          "rendered": 85
+        }
+      ]
+    },
+    {
+      "code": "NEM",
+      "name": "Nemesis",
+      "boosterTypes": 2,
+      "printings": 163,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "NEO",
+      "name": "Kamigawa: Neon Dynasty",
+      "boosterTypes": 12,
+      "printings": 1123,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 540,
+          "rendered": 540
+        },
+        {
+          "key": "draft",
+          "expected": 416,
+          "rendered": 416
+        },
+        {
+          "key": "prerelease",
+          "expected": 77,
+          "rendered": 77
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "set",
+          "expected": 726,
+          "rendered": 726
+        },
+        {
+          "key": "theme-b",
+          "expected": 71,
+          "rendered": 71
+        },
+        {
+          "key": "theme-g",
+          "expected": 73,
+          "rendered": 73
+        },
+        {
+          "key": "theme-ninjas",
+          "expected": 92,
+          "rendered": 92
+        },
+        {
+          "key": "theme-r",
+          "expected": 72,
+          "rendered": 72
+        },
+        {
+          "key": "theme-u",
+          "expected": 72,
+          "rendered": 72
+        },
+        {
+          "key": "theme-w",
+          "expected": 72,
+          "rendered": 72
+        }
+      ]
+    },
+    {
+      "code": "NPH",
+      "name": "New Phyrexia",
+      "boosterTypes": 2,
+      "printings": 175,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 175,
+          "rendered": 175
+        },
+        {
+          "key": "six",
+          "expected": 175,
+          "rendered": 175
+        }
+      ]
+    },
+    {
+      "code": "ODY",
+      "name": "Odyssey",
+      "boosterTypes": 3,
+      "printings": 350,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 350,
+          "rendered": 350
+        },
+        {
+          "key": "fat-pack",
+          "expected": 130,
+          "rendered": 130
+        },
+        {
+          "key": "tournament",
+          "expected": 350,
+          "rendered": 350
+        }
+      ]
+    },
+    {
+      "code": "OGW",
+      "name": "Oath of the Gatewatch",
+      "boosterTypes": 2,
+      "printings": 283,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 229,
+          "rendered": 229
+        },
+        {
+          "key": "prerelease",
+          "expected": 54,
+          "rendered": 54
+        }
+      ]
+    },
+    {
+      "code": "ONE",
+      "name": "Phyrexia: All Will Be One",
+      "boosterTypes": 9,
+      "printings": 988,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 472,
+          "rendered": 472
+        },
+        {
+          "key": "collector-sample",
+          "expected": 134,
+          "rendered": 134
+        },
+        {
+          "key": "compleat",
+          "expected": 25,
+          "rendered": 25
+        },
+        {
+          "key": "draft",
+          "expected": 343,
+          "rendered": 343
+        },
+        {
+          "key": "jumpstart",
+          "expected": 141,
+          "rendered": 141
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "set",
+          "expected": 563,
+          "rendered": 563
+        }
+      ]
+    },
+    {
+      "code": "ONS",
+      "name": "Onslaught",
+      "boosterTypes": 3,
+      "printings": 351,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 351,
+          "rendered": 351
+        },
+        {
+          "key": "fat-pack",
+          "expected": 130,
+          "rendered": 130
+        },
+        {
+          "key": "tournament",
+          "expected": 351,
+          "rendered": 351
+        }
+      ]
+    },
+    {
+      "code": "ORI",
+      "name": "Magic Origins",
+      "boosterTypes": 6,
+      "printings": 312,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 272,
+          "rendered": 272
+        },
+        {
+          "key": "prerelease-chandra",
+          "expected": 38,
+          "rendered": 38
+        },
+        {
+          "key": "prerelease-gideon",
+          "expected": 38,
+          "rendered": 38
+        },
+        {
+          "key": "prerelease-jace",
+          "expected": 38,
+          "rendered": 38
+        },
+        {
+          "key": "prerelease-liliana",
+          "expected": 37,
+          "rendered": 37
+        },
+        {
+          "key": "prerelease-nissa",
+          "expected": 38,
+          "rendered": 38
+        }
+      ]
+    },
+    {
+      "code": "OTJ",
+      "name": "Outlaws of Thunder Junction",
+      "boosterTypes": 6,
+      "printings": 858,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 582,
+          "rendered": 582
+        },
+        {
+          "key": "collector-sample",
+          "expected": 150,
+          "rendered": 150
+        },
+        {
+          "key": "play",
+          "expected": 411,
+          "rendered": 411
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        }
+      ]
+    },
+    {
+      "code": "P02",
+      "name": "Portal Second Age",
+      "boosterTypes": 1,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 165,
+          "rendered": 165
+        }
+      ]
+    },
+    {
+      "code": "PCY",
+      "name": "Prophecy",
+      "boosterTypes": 2,
+      "printings": 163,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "PIP",
+      "name": "Fallout",
+      "boosterTypes": 2,
+      "printings": 1063,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 1063,
+          "rendered": 1063
+        },
+        {
+          "key": "collector-sample",
+          "expected": 202,
+          "rendered": 202
+        }
+      ]
+    },
+    {
+      "code": "PLC",
+      "name": "Planar Chaos",
+      "boosterTypes": 1,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        }
+      ]
+    },
+    {
+      "code": "PLS",
+      "name": "Planeshift",
+      "boosterTypes": 2,
+      "printings": 166,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 146,
+          "rendered": 146
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "POR",
+      "name": "Portal",
+      "boosterTypes": 1,
+      "printings": 215,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 215,
+          "rendered": 215
+        }
+      ]
+    },
+    {
+      "code": "PTK",
+      "name": "Portal Three Kingdoms",
+      "boosterTypes": 1,
+      "printings": 180,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 180,
+          "rendered": 180
+        }
+      ]
+    },
+    {
+      "code": "RAV",
+      "name": "Ravnica: City of Guilds",
+      "boosterTypes": 2,
+      "printings": 306,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 306,
+          "rendered": 306
+        },
+        {
+          "key": "tournament",
+          "expected": 306,
+          "rendered": 306
+        }
+      ]
+    },
+    {
+      "code": "REN",
+      "name": "Renaissance",
+      "boosterTypes": 1,
+      "printings": 122,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 122,
+          "rendered": 122
+        }
+      ]
+    },
+    {
+      "code": "RIN",
+      "name": "Rinascimento",
+      "boosterTypes": 1,
+      "printings": 69,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 69,
+          "rendered": 69
+        }
+      ]
+    },
+    {
+      "code": "RIX",
+      "name": "Rivals of Ixalan",
+      "boosterTypes": 3,
+      "printings": 1447,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 196,
+          "rendered": 196
+        },
+        {
+          "key": "prerelease",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "showdown",
+          "expected": 1379,
+          "rendered": 1379
+        }
+      ]
+    },
+    {
+      "code": "RNA",
+      "name": "Ravnica Allegiance",
+      "boosterTypes": 13,
+      "printings": 1574,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 259,
+          "rendered": 259
+        },
+        {
+          "key": "draft",
+          "expected": 259,
+          "rendered": 259
+        },
+        {
+          "key": "prerelease-azorius",
+          "expected": 65,
+          "rendered": 65
+        },
+        {
+          "key": "prerelease-gruul",
+          "expected": 63,
+          "rendered": 63
+        },
+        {
+          "key": "prerelease-orzhov",
+          "expected": 63,
+          "rendered": 63
+        },
+        {
+          "key": "prerelease-rakdos",
+          "expected": 64,
+          "rendered": 64
+        },
+        {
+          "key": "prerelease-simic",
+          "expected": 63,
+          "rendered": 63
+        },
+        {
+          "key": "showdown",
+          "expected": 1534,
+          "rendered": 1534
+        },
+        {
+          "key": "theme-azorius",
+          "expected": 78,
+          "rendered": 78
+        },
+        {
+          "key": "theme-gruul",
+          "expected": 78,
+          "rendered": 78
+        },
+        {
+          "key": "theme-orzhov",
+          "expected": 77,
+          "rendered": 77
+        },
+        {
+          "key": "theme-rakdos",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "theme-simic",
+          "expected": 80,
+          "rendered": 80
+        }
+      ]
+    },
+    {
+      "code": "ROE",
+      "name": "Rise of the Eldrazi",
+      "boosterTypes": 2,
+      "printings": 248,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 248,
+          "rendered": 248
+        },
+        {
+          "key": "six",
+          "expected": 248,
+          "rendered": 248
+        }
+      ]
+    },
+    {
+      "code": "RTR",
+      "name": "Return to Ravnica",
+      "boosterTypes": 7,
+      "printings": 274,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 274,
+          "rendered": 274
+        },
+        {
+          "key": "prerelease-azorius",
+          "expected": 74,
+          "rendered": 74
+        },
+        {
+          "key": "prerelease-golgari",
+          "expected": 76,
+          "rendered": 76
+        },
+        {
+          "key": "prerelease-izzet",
+          "expected": 74,
+          "rendered": 74
+        },
+        {
+          "key": "prerelease-rakdos",
+          "expected": 73,
+          "rendered": 73
+        },
+        {
+          "key": "prerelease-selesnya",
+          "expected": 74,
+          "rendered": 74
+        },
+        {
+          "key": "six",
+          "expected": 274,
+          "rendered": 274
+        }
+      ]
+    },
+    {
+      "code": "RVR",
+      "name": "Ravnica Remastered",
+      "boosterTypes": 2,
+      "printings": 530,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 530,
+          "rendered": 530
+        },
+        {
+          "key": "draft",
+          "expected": 435,
+          "rendered": 435
+        }
+      ]
+    },
+    {
+      "code": "S99",
+      "name": "Starter 1999",
+      "boosterTypes": 1,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 165,
+          "rendered": 165
+        }
+      ]
+    },
+    {
+      "code": "SCG",
+      "name": "Scourge",
+      "boosterTypes": 2,
+      "printings": 163,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "SHM",
+      "name": "Shadowmoor",
+      "boosterTypes": 2,
+      "printings": 302,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 302,
+          "rendered": 302
+        },
+        {
+          "key": "tournament",
+          "expected": 302,
+          "rendered": 302
+        }
+      ]
+    },
+    {
+      "code": "SLZ",
+      "name": "The Zeta Set",
+      "boosterTypes": 1,
+      "printings": 363,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 363,
+          "rendered": 363
+        }
+      ]
+    },
+    {
+      "code": "SNC",
+      "name": "Streets of New Capenna",
+      "boosterTypes": 16,
+      "printings": 967,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 531,
+          "rendered": 531
+        },
+        {
+          "key": "collector-sample",
+          "expected": 206,
+          "rendered": 206
+        },
+        {
+          "key": "draft",
+          "expected": 360,
+          "rendered": 360
+        },
+        {
+          "key": "prerelease-brokers",
+          "expected": 189,
+          "rendered": 189
+        },
+        {
+          "key": "prerelease-cabaretti",
+          "expected": 190,
+          "rendered": 190
+        },
+        {
+          "key": "prerelease-maestros",
+          "expected": 188,
+          "rendered": 188
+        },
+        {
+          "key": "prerelease-obscura",
+          "expected": 191,
+          "rendered": 191
+        },
+        {
+          "key": "prerelease-riveteers",
+          "expected": 189,
+          "rendered": 189
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "set",
+          "expected": 490,
+          "rendered": 490
+        },
+        {
+          "key": "theme-brokers",
+          "expected": 109,
+          "rendered": 109
+        },
+        {
+          "key": "theme-cabaretti",
+          "expected": 110,
+          "rendered": 110
+        },
+        {
+          "key": "theme-maestros",
+          "expected": 108,
+          "rendered": 108
+        },
+        {
+          "key": "theme-obscura",
+          "expected": 111,
+          "rendered": 111
+        },
+        {
+          "key": "theme-riveteers",
+          "expected": 109,
+          "rendered": 109
+        }
+      ]
+    },
+    {
+      "code": "SOI",
+      "name": "Shadows over Innistrad",
+      "boosterTypes": 2,
+      "printings": 374,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 297,
+          "rendered": 297
+        },
+        {
+          "key": "prerelease",
+          "expected": 77,
+          "rendered": 77
+        }
+      ]
+    },
+    {
+      "code": "SOK",
+      "name": "Saviors of Kamigawa",
+      "boosterTypes": 2,
+      "printings": 185,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "SOM",
+      "name": "Scars of Mirrodin",
+      "boosterTypes": 2,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "six",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "SOS",
+      "name": "Secrets of Strixhaven",
+      "boosterTypes": 10,
+      "printings": 817,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "codex-bundle",
+          "expected": 6,
+          "rendered": 6
+        },
+        {
+          "key": "collector",
+          "expected": 615,
+          "rendered": 615
+        },
+        {
+          "key": "play",
+          "expected": 380,
+          "rendered": 380
+        },
+        {
+          "key": "prerelease-lorehold",
+          "expected": 150,
+          "rendered": 150
+        },
+        {
+          "key": "prerelease-prismari",
+          "expected": 150,
+          "rendered": 150
+        },
+        {
+          "key": "prerelease-quandrix",
+          "expected": 150,
+          "rendered": 150
+        },
+        {
+          "key": "prerelease-silverquill",
+          "expected": 150,
+          "rendered": 150
+        },
+        {
+          "key": "prerelease-witherbloom",
+          "expected": 150,
+          "rendered": 150
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        }
+      ]
+    },
+    {
+      "code": "SPM",
+      "name": "Marvel's Spider-Man",
+      "boosterTypes": 3,
+      "printings": 417,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 344,
+          "rendered": 344
+        },
+        {
+          "key": "play",
+          "expected": 271,
+          "rendered": 271
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        }
+      ]
+    },
+    {
+      "code": "STH",
+      "name": "Stronghold",
+      "boosterTypes": 1,
+      "printings": 143,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        }
+      ]
+    },
+    {
+      "code": "STX",
+      "name": "Strixhaven: School of Mages",
+      "boosterTypes": 17,
+      "printings": 1164,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 571,
+          "rendered": 571
+        },
+        {
+          "key": "draft",
+          "expected": 347,
+          "rendered": 347
+        },
+        {
+          "key": "jp",
+          "expected": 410,
+          "rendered": 410
+        },
+        {
+          "key": "prerelease-lorehold",
+          "expected": 168,
+          "rendered": 168
+        },
+        {
+          "key": "prerelease-prismari",
+          "expected": 164,
+          "rendered": 164
+        },
+        {
+          "key": "prerelease-quandrix",
+          "expected": 164,
+          "rendered": 164
+        },
+        {
+          "key": "prerelease-silverquill",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "prerelease-witherbloom",
+          "expected": 166,
+          "rendered": 166
+        },
+        {
+          "key": "promo",
+          "expected": 193,
+          "rendered": 193
+        },
+        {
+          "key": "promo-foil",
+          "expected": 193,
+          "rendered": 193
+        },
+        {
+          "key": "set",
+          "expected": 657,
+          "rendered": 657
+        },
+        {
+          "key": "set-jp",
+          "expected": 720,
+          "rendered": 720
+        },
+        {
+          "key": "theme-lorehold",
+          "expected": 98,
+          "rendered": 98
+        },
+        {
+          "key": "theme-prismari",
+          "expected": 94,
+          "rendered": 94
+        },
+        {
+          "key": "theme-quandrix",
+          "expected": 94,
+          "rendered": 94
+        },
+        {
+          "key": "theme-silverquill",
+          "expected": 95,
+          "rendered": 95
+        },
+        {
+          "key": "theme-witherbloom",
+          "expected": 96,
+          "rendered": 96
+        }
+      ]
+    },
+    {
+      "code": "SUM",
+      "name": "Summer Magic / Edgar",
+      "boosterTypes": 1,
+      "printings": 306,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "default",
+          "expected": 306,
+          "rendered": 306
+        }
+      ]
+    },
+    {
+      "code": "TDM",
+      "name": "Tarkir: Dragonstorm",
+      "boosterTypes": 11,
+      "printings": 750,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 474,
+          "rendered": 474
+        },
+        {
+          "key": "collector-sample",
+          "expected": 107,
+          "rendered": 107
+        },
+        {
+          "key": "play",
+          "expected": 403,
+          "rendered": 403
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "prerelease-abzan",
+          "expected": 98,
+          "rendered": 98
+        },
+        {
+          "key": "prerelease-jeskai",
+          "expected": 100,
+          "rendered": 100
+        },
+        {
+          "key": "prerelease-mardu",
+          "expected": 99,
+          "rendered": 99
+        },
+        {
+          "key": "prerelease-sultai",
+          "expected": 101,
+          "rendered": 101
+        },
+        {
+          "key": "prerelease-temur",
+          "expected": 99,
+          "rendered": 99
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        }
+      ]
+    },
+    {
+      "code": "THB",
+      "name": "Theros Beyond Death",
+      "boosterTypes": 10,
+      "printings": 614,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 352,
+          "rendered": 352
+        },
+        {
+          "key": "draft",
+          "expected": 268,
+          "rendered": 268
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "theme-b",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "theme-g",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "theme-r",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "theme-u",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "theme-w",
+          "expected": 57,
+          "rendered": 57
+        }
+      ]
+    },
+    {
+      "code": "THS",
+      "name": "Theros",
+      "boosterTypes": 6,
+      "printings": 254,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "prerelease-ambition",
+          "expected": 50,
+          "rendered": 50
+        },
+        {
+          "key": "prerelease-battle",
+          "expected": 51,
+          "rendered": 51
+        },
+        {
+          "key": "prerelease-honor",
+          "expected": 51,
+          "rendered": 51
+        },
+        {
+          "key": "prerelease-might",
+          "expected": 51,
+          "rendered": 51
+        },
+        {
+          "key": "prerelease-wisdom",
+          "expected": 51,
+          "rendered": 51
+        }
+      ]
+    },
+    {
+      "code": "TLA",
+      "name": "Avatar: The Last Airbender",
+      "boosterTypes": 9,
+      "printings": 749,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 651,
+          "rendered": 651
+        },
+        {
+          "key": "commander-bundle",
+          "expected": 13,
+          "rendered": 13
+        },
+        {
+          "key": "play",
+          "expected": 419,
+          "rendered": 419
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "prerelease-aang",
+          "expected": 59,
+          "rendered": 59
+        },
+        {
+          "key": "prerelease-azula",
+          "expected": 59,
+          "rendered": 59
+        },
+        {
+          "key": "prerelease-katara",
+          "expected": 59,
+          "rendered": 59
+        },
+        {
+          "key": "prerelease-toph",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "prerelease-zuko",
+          "expected": 59,
+          "rendered": 59
+        }
+      ]
+    },
+    {
+      "code": "TLE",
+      "name": "Avatar: The Last Airbender Eternal",
+      "boosterTypes": 1,
+      "printings": 316,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "jumpstart",
+          "expected": 316,
+          "rendered": 316
+        }
+      ]
+    },
+    {
+      "code": "TMP",
+      "name": "Tempest",
+      "boosterTypes": 2,
+      "printings": 350,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 330,
+          "rendered": 330
+        },
+        {
+          "key": "starter",
+          "expected": 350,
+          "rendered": 350
+        }
+      ]
+    },
+    {
+      "code": "TMT",
+      "name": "Teenage Mutant Ninja Turtles",
+      "boosterTypes": 4,
+      "printings": 437,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 426,
+          "rendered": 426
+        },
+        {
+          "key": "pizza-bundle",
+          "expected": 6,
+          "rendered": 6
+        },
+        {
+          "key": "play",
+          "expected": 272,
+          "rendered": 272
+        },
+        {
+          "key": "prerelease",
+          "expected": 68,
+          "rendered": 68
+        }
+      ]
+    },
+    {
+      "code": "TOR",
+      "name": "Torment",
+      "boosterTypes": 2,
+      "printings": 163,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        },
+        {
+          "key": "fat-pack",
+          "expected": 75,
+          "rendered": 75
+        }
+      ]
+    },
+    {
+      "code": "TSP",
+      "name": "Time Spiral",
+      "boosterTypes": 2,
+      "printings": 422,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 422,
+          "rendered": 422
+        },
+        {
+          "key": "tournament",
+          "expected": 422,
+          "rendered": 422
+        }
+      ]
+    },
+    {
+      "code": "TSR",
+      "name": "Time Spiral Remastered",
+      "boosterTypes": 1,
+      "printings": 410,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 410,
+          "rendered": 410
+        }
+      ]
+    },
+    {
+      "code": "UDS",
+      "name": "Urza's Destiny",
+      "boosterTypes": 1,
+      "printings": 143,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        }
+      ]
+    },
+    {
+      "code": "UGIN",
+      "name": "Ugin's Fate",
+      "boosterTypes": 1,
+      "printings": 36,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "fate",
+          "expected": 36,
+          "rendered": 36
+        }
+      ]
+    },
+    {
+      "code": "UGL",
+      "name": "Unglued",
+      "boosterTypes": 1,
+      "printings": 88,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 88,
+          "rendered": 88
+        }
+      ]
+    },
+    {
+      "code": "ULG",
+      "name": "Urza's Legacy",
+      "boosterTypes": 1,
+      "printings": 143,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 143,
+          "rendered": 143
+        }
+      ]
+    },
+    {
+      "code": "UMA",
+      "name": "Ultimate Masters",
+      "boosterTypes": 2,
+      "printings": 294,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 40,
+          "rendered": 40
+        },
+        {
+          "key": "draft",
+          "expected": 254,
+          "rendered": 254
+        }
+      ]
+    },
+    {
+      "code": "UNF",
+      "name": "Unfinity",
+      "boosterTypes": 3,
+      "printings": 747,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 10,
+          "rendered": 10
+        },
+        {
+          "key": "collector",
+          "expected": 699,
+          "rendered": 699
+        },
+        {
+          "key": "draft",
+          "expected": 434,
+          "rendered": 434
+        }
+      ]
+    },
+    {
+      "code": "UNH",
+      "name": "Unhinged",
+      "boosterTypes": 1,
+      "printings": 168,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 168,
+          "rendered": 168
+        }
+      ]
+    },
+    {
+      "code": "USG",
+      "name": "Urza's Saga",
+      "boosterTypes": 2,
+      "printings": 350,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 330,
+          "rendered": 330
+        },
+        {
+          "key": "tournament",
+          "expected": 350,
+          "rendered": 350
+        }
+      ]
+    },
+    {
+      "code": "UST",
+      "name": "Unstable",
+      "boosterTypes": 1,
+      "printings": 268,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 268,
+          "rendered": 268
+        }
+      ]
+    },
+    {
+      "code": "VIS",
+      "name": "Visions",
+      "boosterTypes": 2,
+      "printings": 177,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 167,
+          "rendered": 167
+        },
+        {
+          "key": "preview",
+          "expected": 25,
+          "rendered": 25
+        }
+      ]
+    },
+    {
+      "code": "VOW",
+      "name": "Innistrad: Crimson Vow",
+      "boosterTypes": 11,
+      "printings": 829,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 17,
+          "rendered": 17
+        },
+        {
+          "key": "collector",
+          "expected": 435,
+          "rendered": 435
+        },
+        {
+          "key": "draft",
+          "expected": 328,
+          "rendered": 328
+        },
+        {
+          "key": "prerelease",
+          "expected": 84,
+          "rendered": 84
+        },
+        {
+          "key": "set",
+          "expected": 638,
+          "rendered": 638
+        },
+        {
+          "key": "theme-b",
+          "expected": 56,
+          "rendered": 56
+        },
+        {
+          "key": "theme-g",
+          "expected": 55,
+          "rendered": 55
+        },
+        {
+          "key": "theme-r",
+          "expected": 56,
+          "rendered": 56
+        },
+        {
+          "key": "theme-u",
+          "expected": 55,
+          "rendered": 55
+        },
+        {
+          "key": "theme-vampires",
+          "expected": 71,
+          "rendered": 71
+        },
+        {
+          "key": "theme-w",
+          "expected": 55,
+          "rendered": 55
+        }
+      ]
+    },
+    {
+      "code": "WAR",
+      "name": "War of the Spark",
+      "boosterTypes": 9,
+      "printings": 1958,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 264,
+          "rendered": 264
+        },
+        {
+          "key": "jp",
+          "expected": 300,
+          "rendered": 300
+        },
+        {
+          "key": "prerelease",
+          "expected": 124,
+          "rendered": 124
+        },
+        {
+          "key": "showdown",
+          "expected": 1798,
+          "rendered": 1798
+        },
+        {
+          "key": "theme-b",
+          "expected": 57,
+          "rendered": 57
+        },
+        {
+          "key": "theme-g",
+          "expected": 55,
+          "rendered": 55
+        },
+        {
+          "key": "theme-r",
+          "expected": 56,
+          "rendered": 56
+        },
+        {
+          "key": "theme-u",
+          "expected": 56,
+          "rendered": 56
+        },
+        {
+          "key": "theme-w",
+          "expected": 56,
+          "rendered": 56
+        }
+      ]
+    },
+    {
+      "code": "WHO",
+      "name": "Doctor Who",
+      "boosterTypes": 2,
+      "printings": 1133,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 1133,
+          "rendered": 1133
+        },
+        {
+          "key": "collector-sample",
+          "expected": 233,
+          "rendered": 233
+        }
+      ]
+    },
+    {
+      "code": "WOE",
+      "name": "Wilds of Eldraine",
+      "boosterTypes": 7,
+      "printings": 984,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 480,
+          "rendered": 480
+        },
+        {
+          "key": "collector-sample",
+          "expected": 214,
+          "rendered": 214
+        },
+        {
+          "key": "draft",
+          "expected": 390,
+          "rendered": 390
+        },
+        {
+          "key": "prerelease",
+          "expected": 80,
+          "rendered": 80
+        },
+        {
+          "key": "promo",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "promo-foil",
+          "expected": 186,
+          "rendered": 186
+        },
+        {
+          "key": "set",
+          "expected": 618,
+          "rendered": 618
+        }
+      ]
+    },
+    {
+      "code": "WTH",
+      "name": "Weatherlight",
+      "boosterTypes": 1,
+      "printings": 167,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 167,
+          "rendered": 167
+        }
+      ]
+    },
+    {
+      "code": "WWK",
+      "name": "Worldwake",
+      "boosterTypes": 2,
+      "printings": 165,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 165,
+          "rendered": 165
+        },
+        {
+          "key": "six",
+          "expected": 165,
+          "rendered": 165
+        }
+      ]
+    },
+    {
+      "code": "XLN",
+      "name": "Ixalan",
+      "boosterTypes": 4,
+      "printings": 1288,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 279,
+          "rendered": 279
+        },
+        {
+          "key": "prerelease",
+          "expected": 78,
+          "rendered": 78
+        },
+        {
+          "key": "showdown",
+          "expected": 1190,
+          "rendered": 1190
+        },
+        {
+          "key": "treasure-chest",
+          "expected": 1210,
+          "rendered": 1210
+        }
+      ]
+    },
+    {
+      "code": "ZEN",
+      "name": "Zendikar",
+      "boosterTypes": 2,
+      "printings": 249,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "draft",
+          "expected": 249,
+          "rendered": 249
+        },
+        {
+          "key": "six",
+          "expected": 249,
+          "rendered": 249
+        }
+      ]
+    },
+    {
+      "code": "ZNE",
+      "name": "Zendikar Rising Expeditions",
+      "boosterTypes": 1,
+      "printings": 30,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "box-topper",
+          "expected": 30,
+          "rendered": 30
+        }
+      ]
+    },
+    {
+      "code": "ZNR",
+      "name": "Zendikar Rising",
+      "boosterTypes": 12,
+      "printings": 989,
+      "missing": 0,
+      "missingImages": 0,
+      "products": [
+        {
+          "key": "collector",
+          "expected": 411,
+          "rendered": 411
+        },
+        {
+          "key": "draft",
+          "expected": 313,
+          "rendered": 313
+        },
+        {
+          "key": "prerelease",
+          "expected": 84,
+          "rendered": 84
+        },
+        {
+          "key": "promo",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "promo-foil",
+          "expected": 194,
+          "rendered": 194
+        },
+        {
+          "key": "set",
+          "expected": 613,
+          "rendered": 613
+        },
+        {
+          "key": "theme-b",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "theme-g",
+          "expected": 60,
+          "rendered": 60
+        },
+        {
+          "key": "theme-party",
+          "expected": 115,
+          "rendered": 115
+        },
+        {
+          "key": "theme-r",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "theme-u",
+          "expected": 61,
+          "rendered": 61
+        },
+        {
+          "key": "theme-w",
+          "expected": 60,
+          "rendered": 60
+        }
+      ]
+    }
+  ]
+}

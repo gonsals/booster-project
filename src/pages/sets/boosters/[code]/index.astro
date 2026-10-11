@@ -1,220 +1,89 @@
 ---
-import "@/styles/global.css";
 import MainLayout from "@/layouts/MainLayout.astro";
 import FilterButton from "@/components/FilterButton.astro";
-import type { ScryfallCard } from "@/types/scryfall/ScryFallCard";
-
-export const prerender = false;
-
-const { code } = Astro.params;
+import CardModal from "@/components/CardModal.astro";
+import { cardDetails, percentage } from "@/lib/cardDetails";
+import { getBoosterData, type BoosterData } from "@/lib/boosters";
+import { selectCards, type CardOptions } from "@/lib/cards";
+import { DataError } from "@/lib/http";
+const code = (Astro.params.code ?? "").toLowerCase();
 const url = Astro.url;
-
-// query params
-const sort = url.searchParams.get("sort") ?? "value";
-const fun = url.searchParams.get("fun");
-const art = url.searchParams.get("art");
-
-const filterButtons = [
-    {
-        label: "Valor",
-        key: "sort",
-        value: "value",
-        isActive: () => sort === "value",
-    },
-    {
-        label: "EDHREC",
-        key: "sort",
-        value: "rank",
-        isActive: () => sort === "rank",
-    },
-    {
-        label: "Collector",
-        key: "fun",
-        value: "boosterfun",
-        isActive: () => fun === "boosterfun",
-    },
-    {
-        label: "Full Art",
-        key: "art",
-        value: "full",
-        isActive: () => art === "full",
-    },
-];
-
-/* Helper toggle */
-function toggle(key: string, value: string) {
+const options: CardOptions = {
+    collector: url.searchParams.get("fun") === "boosterfun",
+    booster: url.searchParams.get("booster") ?? "auto",
+    fullArt: url.searchParams.get("art") === "full",
+    sort: url.searchParams.get("sort") === "rank" ? "rank" : "value",
+    finish: ["nonfoil", "foil", "etched"].includes(url.searchParams.get("finish") ?? "") ? url.searchParams.get("finish") as CardOptions["finish"] : "auto",
+    query: (url.searchParams.get("q") ?? "").trim().slice(0, 100),
+};
+let data: BoosterData | undefined;
+let error = "";
+try { data = await getBoosterData(code, options.booster); options.booster = data.activeBooster; }
+catch (cause) {
+    console.error("Booster data unavailable", cause);
+    Astro.response.status = cause instanceof DataError && cause.status === 404 ? 404 : 503;
+    error = Astro.response.status === 404 ? "No encontramos esta colección" : "No se pudieron cargar las cartas";
+    if (cause instanceof DataError && cause.retryAfter) Astro.response.headers.set("Retry-After", String(cause.retryAfter));
+}
+Astro.response.headers.set("Cache-Control", error ? "no-store" : "public, max-age=60, s-maxage=300");
+const cards = data ? selectCards(data.pool, options) : [];
+const total = data ? selectCards(data.pool, { ...options, booster: "all", fullArt: false, finish: "auto", query: "" }).length : 0;
+const name = data?.name ?? code.toUpperCase();
+const labels = Object.fromEntries(data?.boosters.map(b => [b.key, b.label]) ?? []);
+const entries = new Map(data?.pool.map(entry => [entry.card.id, entry]));
+const details = cards.map(({ card }) => cardDetails(entries.get(card.id)!, labels));
+const upcoming = !!data && data.releaseDate > new Date().toISOString().slice(0, 10);
+const finishLabels = { nonfoil: "Normal", foil: "Foil", etched: "Etched" };
+const rarityLabels: Record<string, string> = { common: "Común", uncommon: "Infrecuente", rare: "Rara", mythic: "Mítica", special: "Especial", bonus: "Bonus" };
+const usd = new Intl.NumberFormat("es", { style: "currency", currency: "USD" });
+const selectedLabel = options.booster === "all" ? "Todos los sobres" : options.booster === "standard" ? "Sobres estándar" : data?.boosters.find(b => b.key === options.booster)?.label ?? "Collector Booster";
+function filterUrl(key: string, value: string, toggle = false) {
     const params = new URLSearchParams(url.search);
-
-    if (params.get(key) === value) {
-        params.delete(key);
-    } else {
-        params.set(key, value);
-    }
-
-    return "?" + params.toString();
-}
-
-/* ===== SCRYFALL ===== */
-
-let allCards: ScryfallCard[] = [];
-let pageUrl: string =
-    `https://api.scryfall.com/cards/search` +
-    `?q=e:${code}` +
-    `&unique=prints` +
-    `&fields=` +
-    [
-        "id",
-        "name",
-        "set_name",
-        "rarity",
-        "prices",
-        "image_uris",
-        "booster",
-        "promo",
-        "promo_types",
-        "digital",
-        "full_art",
-        "edhrec_rank",
-    ].join(",");
-
-while (pageUrl) {
-    const res = await fetch(pageUrl, {
-        headers: {
-            Accept: "application/json",
-            "Cache-Control":
-                "public, s-maxage=21600, stale-while-revalidate=86400",
-        },
-    });
-
-    if (!res.ok) break;
-
-    const json = await res.json();
-    allCards.push(...json.data);
-    pageUrl = json.has_more ? json.next_page : null;
-}
-
-/* ===== BASE FILTER ===== */
-let cards: ScryfallCard[] = allCards.filter((c) => {
-    if (!c.image_uris?.normal) return false;
-
-    if (fun !== "boosterfun" && c.promo_types?.includes("boosterfun")) {
-        return false;
-    }
-
-    if (art === "full" && c.full_art !== true) {
-        return false;
-    }
-
-    return true;
-});
-
-/* ===== SORT ===== */
-
-function getPrice(card: ScryfallCard): number {
-    const p = card.prices;
-    if (!p) return 0;
-
-    return (p.usd && Number(p.usd)) || (p.usd_foil && Number(p.usd_foil)) || 0;
-}
-
-// DESC sort
-if (sort === "rank") {
-    cards.sort((a, b) => (a.edhrec_rank ?? 999999) - (b.edhrec_rank ?? 999999));
-} else {
-    cards.sort((a, b) => {
-        const aPrice = getPrice(a);
-        const bPrice = getPrice(b);
-        return bPrice - aPrice; // DESC
-    });
+    if (toggle && params.get(key) === value) params.delete(key); else params.set(key, value);
+    return `?${params}`;
 }
 ---
-
-<MainLayout
-    content={{ title: `Boosters – ${code?.toUpperCase()}`, code }}
-    showNav
->
-    <main class="max-w-7xl mx-auto p-6">
-        <!-- HEADER -->
-        <header class="flex flex-wrap items-end justify-between gap-4 mb-8">
-            <div>
-                <h1
-                    class="text-3xl font-extrabold tracking-tight"
-                    transition:name={`set-title-${code}`}
-                >
-                    {cards[0]?.set_name ?? code?.toUpperCase()}
-                </h1>
-                <p class="mt-1 text-sm text-gray-600">
-                    Set {code?.toUpperCase()} · Play Boosters
-                    {fun === "boosterfun" && " + Collector"}
-                </p>
+<MainLayout content={{ title: `${name} · MTG Top Picks`, code }}>
+    <main class="page-shell">
+        <a class="back-link" href="/sets/1">← Todas las colecciones</a>
+        <header class="booster-hero"><div>
+            <p class="eyebrow">Descubre tu próxima gran carta</p>
+            <h1 class="booster-title" transition:name={`set-title-${code}`}>{name}</h1>
+            <p class="booster-subtitle">{selectedLabel} · cada impresión, su imagen y su precio</p>
+            {data && <div class="hero-stats"><div class="hero-stat"><strong>{total.toLocaleString("es")}</strong><span>{options.booster === "all" ? "Impresiones disponibles" : "Impresiones en este sobre"}</span></div><div class="hero-stat"><strong>{data.boosters.length || "—"}</strong><span>Tipos de sobre</span></div><div class="hero-stat"><strong>{new Set(data.pool.filter(c => !c.card.digital).map(c => c.card.set)).size}</strong><span>Colecciones incluidas</span></div></div>}
+        </div><div class="booster-stamp" aria-hidden="true"><span>✦</span><strong>{code}</strong></div></header>
+        {error ? <section class="notice" role="alert"><h2 class="text-lg font-bold">{error}</h2><p class="mt-2">{Astro.response.status === 404 ? "Comprueba el código o vuelve al catálogo." : "El proveedor de datos no está disponible. Inténtalo de nuevo en unos momentos."}</p><div class="mt-4 flex gap-3">{Astro.response.status !== 404 && <a href={url.pathname + url.search} class="button-secondary">Reintentar</a>}<a href="/sets/1" class="button-secondary">Ver catálogo</a></div></section> : <>
+            {upcoming && <p class="notice notice-warning mb-4">Vista previa · Lanzamiento el {data?.releaseDate}. Las cartas e imágenes pueden cambiar.{data?.pending ? ` Hay ${data.pending} impresiones físicas pendientes de publicación en Scryfall.` : ""}</p>}
+            {data?.approximate && <p class="notice notice-warning mb-4">Selección provisional · Aún no hay una composición exacta publicada para estos sobres. La selección de Scryfall puede no incluir todas las cartas extra.</p>}
+            {!!data?.warnings && <p class="notice notice-warning mb-4">Hay diferencias entre proveedores en los acabados de {data.warnings} impresiones. Los acabados sin confirmar se indican en la carta y no reciben un precio de otro acabado.</p>}
+            <p class="opening-guide"><span aria-hidden="true">✦</span> Elige el tipo de sobre que vas a abrir. Pulsa una carta para ver su valor, sus acabados y la probabilidad de encontrarla.</p>
+            <div class="booster-filters">
+                <nav aria-label="Ordenación y filtros de cartas" class="filter-row">
+                    <FilterButton href={filterUrl("booster", "all")} active={options.booster === "all"}>Todos los sobres</FilterButton>
+                    <FilterButton href={filterUrl("booster", "standard")} active={options.booster === "standard"}>Sobres estándar</FilterButton>
+                    {data?.hasCollector && <FilterButton href={filterUrl("booster", "collector")} active={options.booster === "collector"}>Collector</FilterButton>}
+                    <FilterButton href={filterUrl("sort", "value")} active={options.sort === "value"}>↓ Valor</FilterButton>
+                    <FilterButton href={filterUrl("sort", "rank")} active={options.sort === "rank"}>EDHREC</FilterButton>
+                    <FilterButton href={filterUrl("art", "full", true)} active={options.fullArt}>Full Art</FilterButton>
+                </nav>
+                <form method="get" action={url.pathname} class="search-form" role="search">
+                    <input type="hidden" name="sort" value={options.sort} />
+                    {options.fullArt && <input type="hidden" name="art" value="full" />}
+                    <div class="search-field"><label for="card-search" class="field-label">Buscar carta</label><input id="card-search" type="search" name="q" value={options.query} maxlength="100" placeholder="Encuentra una carta…" class="field w-full" /></div>
+                    <div class="min-w-0"><label for="booster" class="field-label">Sobre</label><select id="booster" name="booster" class="field max-w-full"><option value="all" selected={options.booster === "all"}>Todos los sobres</option><option value="standard" selected={options.booster === "standard"}>Sobres estándar</option>{data?.boosters.map(b => <option value={b.key} selected={options.booster === b.key}>{b.label} · {b.count}</option>)}</select></div>
+                    <div class="min-w-0"><label for="finish" class="field-label">Acabado y precio</label><select id="finish" name="finish" class="field"><option value="auto" selected={options.finish === "auto"}>Primer acabado disponible</option>{Object.entries(finishLabels).map(([value, label]) => <option value={value} selected={options.finish === value}>{label}</option>)}</select></div>
+                    <button type="submit" class="button-primary">Aplicar</button><a href={url.pathname} class="button-secondary">Restablecer</a>
+                </form>
             </div>
-
-            <!-- FILTERS -->
-            <div class="flex flex-wrap gap-2 text-sm">
-                {
-                    filterButtons.map((f) => (
-                        <FilterButton
-                            href={toggle(f.key, f.value)}
-                            active={f.isActive()}
-                        >
-                            {f.label}
-                        </FilterButton>
-                    ))
-                }
-            </div>
-        </header>
-
-        <!-- GRID -->
-        <section
-            class="grid gap-5"
-            style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));"
-        >
-            {
-                cards.map((card) => (
-                    <article class="bg-white rounded-xl border hover:shadow-md transition overflow-hidden">
-                        <img
-                            src={card.image_uris?.normal}
-                            alt={card.name}
-                            loading="lazy"
-                            class="w-full"
-                        />
-
-                        <div class="p-3 text-sm">
-                            <h2 class="font-semibold truncate">{card.name}</h2>
-
-                            <div class="mt-1 flex justify-between text-xs text-gray-600">
-                                <span class="capitalize">{card.rarity}</span>
-
-                                {card.prices?.usd ? (
-                                    <span class="font-semibold">
-                                        ${card.prices.usd}
-                                    </span>
-                                ) : card.prices?.usd_foil !== null ? (
-                                    <span class="font-semibold">
-                                        ${card.prices.usd_foil}
-                                    </span>
-                                ) : (
-                                    <span class="text-gray-400">—</span>
-                                )}
-                            </div>
-
-                            {card.edhrec_rank && (
-                                <div class="mt-1 text-xs text-gray-400">
-                                    EDHREC #{card.edhrec_rank}
-                                </div>
-                            )}
-                        </div>
-                    </article>
-                ))
-            }
-        </section>
-
-        {
-            cards.length === 0 && (
-                <p class="mt-10 text-sm text-gray-600">
-                    No hay cartas para estos filtros.
-                </p>
-            )
-        }
+            <div class="card-results-bar"><p class="result-meta" aria-live="polite"><strong class="text-[var(--text)]">{cards.length.toLocaleString("es")} impresiones</strong> de {total.toLocaleString("es")} disponibles · precios en USD</p><p class="result-meta"><i class="update-dot"></i>Composición: {data?.date}</p></div>
+            {cards.length ? <section class="card-grid" aria-label="Cartas de sobres">
+                {cards.map(({ card, finish, price, images, unverifiedFinish }, index) => <article class="mtg-card" data-card-id={card.id}>
+                    {images.length ? <button type="button" class="card-image-link" data-open-card={card.id} aria-haspopup="dialog" aria-label={`Ver detalles de ${card.name}, ${card.set.toUpperCase()} #${card.collector_number}`}><img src={images[0].url} alt={images[0].name} width="488" height="680" loading={index < 5 ? "eager" : "lazy"} decoding="async" class="card-image" /></button> : <button type="button" data-open-card={card.id} aria-haspopup="dialog" aria-label={`Ver detalles de ${card.name}`} class="card-placeholder w-full"><span aria-hidden="true">✧</span>Imagen pendiente</button>}
+                    {images.length > 1 && <details class="card-reverse"><summary>Ver reverso</summary>{images.slice(1).map(face => <img src={face.url} alt={face.name} width="488" height="680" loading="lazy" />)}</details>}
+                    <div class="card-info"><h2 class="card-name"><button type="button" data-open-card={card.id} aria-haspopup="dialog" class="text-left">{card.name}</button></h2><p class="card-number"><i class={`rarity-dot rarity-${card.rarity}`}></i>{card.set.toUpperCase()} #{card.collector_number} · {rarityLabels[card.rarity] ?? card.rarity}</p><div class="card-price-row"><span class={`finish-tag finish-${finish}`}>{finishLabels[finish]}</span><span class="card-price">{price === null ? "Sin precio" : usd.format(price)}</span></div>{unverifiedFinish && <p class="mt-2 text-[9px] text-[var(--gold)]">Acabado sin confirmar</p>}{card.edhrec_rank != null && <p class="card-rank">EDHREC <strong>#{card.edhrec_rank.toLocaleString("es")}</strong></p>}<p class="card-odds-hint">{entries.get(card.id)?.odds?.[options.booster ?? ""] ? `${percentage(entries.get(card.id)!.odds![options.booster!].chance)} · prob. estimada` : "Ver valor y probabilidades ↗"}</p></div>
+                </article>)}
+            </section> : <section class="notice"><h2 class="font-bold">No hay cartas para estos filtros</h2><p class="mt-2">Prueba otro acabado, selecciona todos los sobres o restablece los filtros. Las colecciones en vista previa pueden no tener cartas todavía.</p><a class="button-secondary mt-4" href={url.pathname}>Restablecer filtros</a></section>}
+            <CardModal cards={details} booster={options.booster ?? "all"} date={data?.date ?? ""} approximate={!!data?.approximate} products={data?.boosters ?? []} />
+        </>}
     </main>
 </MainLayout>
