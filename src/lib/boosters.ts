@@ -7,11 +7,14 @@ import { paperBoosterConfigs, resolveBoosterMembers, boosterLabel, preferredBoos
 import { DataError, fetchJson } from "./http.ts";
 import { resolveBoosterOdds } from "./boosterOdds.ts";
 
-type CompactSet = Pick<MtgSet, "code" | "name" | "releaseDate" | "booster"> & { cards: Pick<MtgSet["cards"][number], "uuid" | "identifiers" | "finishes" | "availability">[] };
+type CompactSet = Pick<MtgSet, "code" | "name" | "releaseDate" | "booster" | "isPartialPreview"> & { cards: Pick<MtgSet["cards"][number], "uuid" | "identifiers" | "finishes" | "availability">[] };
 type CardList = { data: ScryfallCard[]; has_more?: boolean; next_page?: string; not_found?: unknown[] };
-export type BoosterData = { name: string; releaseDate: string; date: string; activeBooster: string; pool: BoosterCard[]; approximate: boolean; hasCollector: boolean; boosters: { key: string; label: string; count: number }[]; warnings: number; pending: number };
-const setCache = createCache<MTGJSONResponse<CompactSet>>(60 * 60 * 1000, 32);
-const poolCache = createCache<BoosterData>(60 * 60 * 1000, 20);
+export type BoosterData = { name: string; releaseDate: string; date: string; activeBooster: string; pool: BoosterCard[]; approximate: boolean; hasCollector: boolean; boosters: { key: string; label: string; count: number }[]; warnings: number; pending: number; preview?: boolean; previewUnavailable?: boolean; previewCheckedAt?: string };
+const previewTtl = 5 * 60 * 1000;
+const isPreview = (set: Pick<CompactSet, "releaseDate" | "isPartialPreview">) => !!set.isPartialPreview || set.releaseDate > new Date().toISOString().slice(0, 10);
+const setCache = createCache<MTGJSONResponse<CompactSet>>(json => isPreview(json.data) ? previewTtl : 60 * 60 * 1000, 32);
+const poolCache = createCache<BoosterData>(data => data.preview ? previewTtl : 60 * 60 * 1000, 20);
+const previewCache = createCache<ScryfallCard[]>(previewTtl, 24);
 const printingCache = new Map<string, { card: ScryfallCard; savedAt: number }>();
 const printingTtl = 60 * 60 * 1000;
 
@@ -20,8 +23,8 @@ function getSet(code: string) {
     return setCache(code.toUpperCase(), async () => {
         const json = await fetchJson<MTGJSONResponse<MtgSet>>(`https://mtgjson.com/api/v5/${code.toUpperCase()}.json`);
         if (!json.data || !Array.isArray(json.data.cards)) throw new Error("Invalid MTGJSON set");
-        const { code: setCode, name, releaseDate, booster, cards } = json.data;
-        return { meta: json.meta, data: { code: setCode, name, releaseDate, booster,
+        const { code: setCode, name, releaseDate, booster, cards, isPartialPreview } = json.data;
+        return { meta: json.meta, data: { code: setCode, name, releaseDate, booster, isPartialPreview,
             cards: [...cards, ...(json.data.tokens ?? [])].map(({ uuid, identifiers, finishes, availability }) => ({ uuid, identifiers, finishes, availability })) } };
     });
 }
@@ -79,21 +82,61 @@ async function loadPrintings(ids: string[]): Promise<ScryfallCard[]> {
     return result;
 }
 
+function loadPreviews(code: string): Promise<ScryfallCard[]> {
+    return previewCache(code.toLowerCase(), async () => {
+        const search = new URL("https://api.scryfall.com/cards/search");
+        search.search = new URLSearchParams({ q: `set:${code.toLowerCase()} game:paper`, unique: "prints", include_variations: "true", order: "set" }).toString();
+        let url: string | undefined = search.href;
+        const seen = new Set<string>();
+        const cards = new Map<string, ScryfallCard>();
+        while (url) {
+            const next = new URL(url);
+            if (next.origin !== search.origin || next.pathname !== search.pathname || seen.has(url) || seen.size >= 50) throw new Error("Invalid Scryfall preview pagination");
+            seen.add(url);
+            let page: CardList;
+            try { page = await scryfall<CardList>(url); }
+            catch (error) {
+                // Scryfall returns 404 for a search with no published previews yet.
+                if (seen.size === 1 && error instanceof DataError && error.status === 404) return [];
+                throw error;
+            }
+            if (!Array.isArray(page.data) || (page.has_more && !page.next_page)) throw new Error("Incomplete Scryfall previews");
+            for (const card of page.data) {
+                if (card.set?.toLowerCase() === code.toLowerCase() && card.games?.includes("paper") && !card.digital && !card.oversized
+                    && !["token", "double_faced_token", "emblem", "art_series"].includes(card.layout)) cards.set(card.id, card);
+            }
+            url = page.has_more ? page.next_page : undefined;
+        }
+        return [...cards.values()];
+    });
+}
+
+const provisionalCard = (card: ScryfallCard, preview: boolean): BoosterCard => ({ card, preview, provisional: true,
+    play: [], collector: [], products: { provisional: card.finishes } });
+
 export function getBoosterData(code: string, requestedBooster = "all"): Promise<BoosterData> {
     return poolCache(`${code.toLowerCase()}:${requestedBooster}`, async () => {
         const { data: set, meta } = await getSet(code);
         const configs = paperBoosterConfigs(set);
+        const preview = isPreview(set);
+        let previews: ScryfallCard[] = [];
+        let previewUnavailable = false;
+        let previewFailure: unknown;
+        if (preview) {
+            try { previews = await loadPreviews(set.code); }
+            catch (error) { previewUnavailable = true; previewFailure = error; console.warn("Preview update unavailable", set.code, error); }
+        }
+        const previewCheckedAt = preview && !previewUnavailable ? new Date().toISOString() : undefined;
         const activeBooster = requestedBooster === "auto" ? preferredBooster(configs.map(([key]) => key)) : requestedBooster;
         if (!configs.length) {
             // Without collation, show all published paper printings as provisional.
             // Preview cards often have booster=false until their release.
             const ids = [...new Set(set.cards.filter(c => c.availability?.includes("paper")).map(c => c.identifiers.scryfallId).filter((id): id is string => Boolean(id)))];
-            const cards = await loadPrintings(ids);
+            if (previewUnavailable && !ids.length) throw previewFailure instanceof DataError ? previewFailure : new DataError("Preview cards unavailable", 503);
+            const cards = preview && !previewUnavailable ? previews : await loadPrintings(ids);
             return { name: set.name, releaseDate: set.releaseDate, date: meta.date, activeBooster, approximate: true,
-                hasCollector: cards.some((c) => c.promo_types?.includes("boosterfun")), boosters: [], warnings: 0, pending: 0,
-                pool: cards.map((card) => ({ card,
-                    play: card.finishes,
-                    collector: card.promo_types?.includes("boosterfun") ? card.finishes : [], products: { provisional: card.finishes } })) };
+                hasCollector: false, boosters: [], warnings: 0, pending: 0, preview, previewUnavailable, previewCheckedAt,
+                pool: cards.map(card => provisionalCard(card, preview)) };
         }
         const sourceCodes = [...new Set(configs.flatMap(([, config]) => config.sourceSetCodes))].filter((source) => source.toUpperCase() !== set.code.toUpperCase());
         const sources: MTGJSONResponse<CompactSet>[] = [];
@@ -109,12 +152,16 @@ export function getBoosterData(code: string, requestedBooster = "all"): Promise<
         const odds = resolveBoosterOdds(set, sources.map((s) => s.data));
         const ids = [...members.entries()].filter(([, member]) => activeBooster === "all"
             || (activeBooster === "standard" ? member.play.size > 0 : !!member.products[activeBooster])).map(([id]) => id);
-        const cards = await loadPrintings(ids);
+        const previewById = new Map(previews.map(card => [card.id, card]));
+        const downloaded = new Map((await loadPrintings(ids.filter(id => !previewById.has(id)))).map(card => [card.id, card]));
+        const cards = ids.map(id => previewById.get(id) ?? downloaded.get(id)!);
         return { name: set.name, releaseDate: set.releaseDate, date: meta.date, activeBooster, approximate: false,
             hasCollector: configs.some(([key]) => key === "collector"),
             boosters: configs.map(([key, config]) => ({ key, label: boosterLabel(key, config.name), count: [...members.values()].filter((m) => m.products[key]).length })),
             warnings: [...members.values()].filter(m => m.warnings.length).length,
             pending: cards.filter(c => c.digital || c.oversized).length,
-            pool: cards.map((card) => ({ card, play: [...members.get(card.id)!.play], collector: [...members.get(card.id)!.collector], odds: odds.get(card.id), products: Object.fromEntries(Object.entries(members.get(card.id)!.products).map(([key, finishes]) => [key, [...finishes]])) })) };
+            preview, previewUnavailable, previewCheckedAt,
+            pool: [...cards.map((card) => ({ card, preview, play: [...members.get(card.id)!.play], collector: [...members.get(card.id)!.collector], odds: odds.get(card.id), products: Object.fromEntries(Object.entries(members.get(card.id)!.products).map(([key, finishes]) => [key, [...finishes]])) })),
+                ...previews.filter(card => !members.has(card.id)).map(card => provisionalCard(card, true))] };
     });
 }

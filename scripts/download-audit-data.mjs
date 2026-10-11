@@ -43,7 +43,7 @@ console.log('Reading all MTGJSON sets with bounded memory…');
 const stream = chain([createReadStream(`${dir}/all-printings-${list.meta.date}.gz`), createGunzip(), parser(), pick({ filter: 'data' }), streamObject()]);
 for await (const { key, value: s } of stream) {
     sets[key] = { code: s.code, name: s.name, releaseDate: s.releaseDate, type: s.type, isOnlineOnly: s.isOnlineOnly,
-        sealedProduct: s.sealedProduct, booster: s.booster,
+        sealedProduct: s.sealedProduct, booster: s.booster, isPartialPreview: s.isPartialPreview,
         cards: [...s.cards, ...(s.tokens ?? [])].map(c => ({ uuid: c.uuid, identifiers: { scryfallId: c.identifiers.scryfallId }, finishes: c.finishes, name: c.name, language: c.language, availability: c.availability })) };
 }
 await writeFile(`${dir}/sets.json`, JSON.stringify(sets));
@@ -57,6 +57,7 @@ for await (const line of lines) {
         scryfall_uri: c.scryfall_uri, rarity: c.rarity, finishes: c.finishes, prices: c.prices, full_art: c.full_art,
         artist: c.artist, type_line: c.type_line, mana_cost: c.mana_cost, oracle_text: c.oracle_text, power: c.power, toughness: c.toughness,
         booster: c.booster, promo: c.promo, promo_types: c.promo_types, edhrec_rank: c.edhrec_rank, digital: c.digital, oversized: c.oversized,
+        games: c.games, layout: c.layout, preview: c.preview,
         image_uris: c.image_uris?.normal ? { normal: c.image_uris.normal } : undefined,
         card_faces: c.card_faces?.map(f => ({ name: f.name, type_line: f.type_line, mana_cost: f.mana_cost, oracle_text: f.oracle_text, image_uris: f.image_uris?.normal ? { normal: f.image_uris.normal } : undefined })) };
 }

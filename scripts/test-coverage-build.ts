@@ -9,6 +9,8 @@ const read = async (name: string) => JSON.parse(await readFile(`.cache/coverage/
 const list = await read("set-list");
 const sets = await read("sets");
 const cards = await read("scryfall");
+const previewsBySet = Map.groupBy(Object.values(cards).filter((card: any) => card.games?.includes("paper") && !card.digital && !card.oversized && !["token", "double_faced_token", "emblem", "art_series"].includes(card.layout)), (card: any) => card.set);
+const previewFor = (set: any): any[] => set.isPartialPreview || set.releaseDate > new Date().toISOString().slice(0, 10) ? previewsBySet.get(set.code.toLowerCase()) ?? [] : [];
 const sources = await read("sources");
 const { default: app } = await import("../.vercel/output/functions/_render.func/entry.mjs");
 const originalFetch = globalThis.fetch;
@@ -29,6 +31,11 @@ globalThis.fetch = async (input, init) => {
         const ids = JSON.parse(String(init?.body)).identifiers.map((i: { id: string }) => i.id);
         assert.ok(ids.length <= 75);
         return Response.json({ data: ids.filter((id: string) => cards[id]).map((id: string) => cards[id]), not_found: ids.filter((id: string) => !cards[id]) });
+    }
+    if (url.startsWith("https://api.scryfall.com/cards/search?")) {
+        const code = new URL(url).searchParams.get("q")?.match(/^set:([a-z0-9]+) game:paper$/)?.[1];
+        const previews = previewsBySet.get(code) ?? [];
+        return previews.length ? Response.json({ data: previews, has_more: false }) : new Response("", { status: 404 });
     }
     throw new Error(`Unexpected provider request: ${url}`);
 };
@@ -78,22 +85,25 @@ try {
     for (const [index, entry] of catalog.entries()) {
         const set = sets[entry.code.toUpperCase()];
         const configs = paperBoosterConfigs(set);
-        const all = new Set<string>();
+        const all = new Set<string>(configs.flatMap(([, config]) => [...expectedFor(config)]));
+        const previews = previewFor(set);
+        const unassigned = new Set<string>(previews.filter(card => !all.has(card.id)).map(card => card.id));
         for (const [key, config] of configs) {
-            const expected = expectedFor(config);
-            for (const id of expected) all.add(id);
+            const expected = new Set([...expectedFor(config), ...unassigned]);
             await check(`/sets/boosters/${entry.code}?booster=${encodeURIComponent(key)}`, expected, "data-card-id");
         }
         if (!configs.length) {
-            for (const c of set.cards) if (c.availability?.includes("paper") && physical(c.identifiers.scryfallId)) all.add(c.identifiers.scryfallId);
+            if (set.isPartialPreview || set.releaseDate > new Date().toISOString().slice(0, 10)) for (const card of previews) all.add(card.id);
+            else for (const c of set.cards) if (c.availability?.includes("paper") && physical(c.identifiers.scryfallId)) all.add(c.identifiers.scryfallId);
         }
+        for (const id of unassigned) all.add(id);
         const html = await check(`/sets/boosters/${entry.code}?booster=all`, all, "data-card-id");
         const preferred = preferredBooster(configs.map(([key]) => key));
         const primary = configs.find(([key]) => key === preferred);
-        await check(`/sets/boosters/${entry.code}`, primary ? expectedFor(primary[1]) : all, "data-card-id");
+        await check(`/sets/boosters/${entry.code}`, primary ? new Set([...expectedFor(primary[1]), ...unassigned]) : all, "data-card-id");
         if (html) {
             for (const [key] of configs) assert.ok(html.includes(`value="${key}"`), `${entry.code}: missing booster selector ${key}`);
-            if (!configs.length) assert.ok(html.includes("Selección provisional"));
+            if (!configs.length) assert.ok(html.includes(set.isPartialPreview || set.releaseDate > new Date().toISOString().slice(0, 10) ? "Adelantos publicados" : "Selección provisional"));
         }
         if ((index + 1) % 25 === 0) console.log(`Verified ${index + 1}/${catalog.length} collections (${routeCount} routes).`);
     }

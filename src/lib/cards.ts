@@ -2,7 +2,7 @@ import type { ScryfallCard } from "../types/scryfall/ScryFallCard";
 import type { Finish } from "../types/scryfall/ScryFallEnums";
 import type { PrintingOdds } from "./boosterOdds.ts";
 
-export type BoosterCard = { card: ScryfallCard; play: Finish[]; collector: Finish[]; products?: Record<string, Finish[]>; odds?: PrintingOdds };
+export type BoosterCard = { card: ScryfallCard; play: Finish[]; collector: Finish[]; products?: Record<string, Finish[]>; odds?: PrintingOdds; preview?: boolean; provisional?: boolean };
 export type CardOptions = { collector: boolean; fullArt: boolean; finish: "auto" | Finish; sort: "value" | "rank"; query: string; booster?: string };
 
 export function cardImages(card: ScryfallCard) {
@@ -19,8 +19,9 @@ export function priceFor(card: ScryfallCard, finish: Finish): number | null {
 
 export function selectCards(pool: BoosterCard[], options: CardOptions) {
     const needle = options.query.trim().toLocaleLowerCase("es");
-    return pool.flatMap(({ card, play, collector, products }) => {
-        const finishes = options.booster === "all" ? [...new Set(products ? Object.values(products).flat() : [...play, ...collector])]
+    return pool.flatMap(({ card, play, collector, products, provisional }) => {
+        // Unassigned previews are visible in the pack without claiming product membership.
+        const finishes = provisional ? card.finishes : options.booster === "all" ? [...new Set(products ? Object.values(products).flat() : [...play, ...collector])]
             : options.booster && !["standard", "collector"].includes(options.booster) ? products?.[options.booster] ?? []
             : options.booster === "standard" ? play
             : options.booster === "collector" ? collector

@@ -3,6 +3,7 @@
 import { readFile } from 'node:fs/promises';
 const read = async name => JSON.parse(await readFile(new URL(`../.cache/coverage/${name}.json`, import.meta.url), 'utf8'));
 const [list, sets, cards] = await Promise.all(['set-list', 'sets', 'scryfall'].map(read));
+const previewsBySet = Map.groupBy(Object.values(cards).filter(card => card.games?.includes('paper')), card => card.set);
 const original = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
     const url = String(input);
@@ -12,6 +13,12 @@ globalThis.fetch = async (input, init) => {
     if (url === 'https://api.scryfall.com/cards/collection') {
         const ids = JSON.parse(String(init?.body)).identifiers.map(i => i.id);
         return Response.json({ data: ids.filter(id => cards[id]).map(id => cards[id]), not_found: ids.filter(id => !cards[id]) });
+    }
+    if (url.startsWith('https://api.scryfall.com/cards/search?')) {
+        const query = new URL(url).searchParams.get('q');
+        const code = query?.match(/^set:([a-z0-9]+) game:paper$/)?.[1];
+        const previews = previewsBySet.get(code) ?? [];
+        return previews.length ? Response.json({ data: previews, has_more: false }) : new Response('', { status: 404 });
     }
     return original(input, init);
 };

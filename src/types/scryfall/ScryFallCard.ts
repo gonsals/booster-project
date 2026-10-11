@@ -25,7 +25,8 @@ export type ScryfallCard = {
     scryfall_uri: string;
     layout: string;
     highres_image: boolean;
-    image_status: "missing" | "lowres" | "highres_scan";
+    image_status: "missing" | "placeholder" | "lowres" | "highres_scan";
+    preview?: { source?: string; source_uri?: string; previewed_at?: string };
     image_uris?: ScryfallImageUris;
     card_faces?: ScryfallCardFace[];
     mana_cost?: string;

@@ -199,3 +199,7 @@
 @keyframes loading-sweep { from { transform:translateX(-110%); } to { transform:translateX(350%); } }
 @media(max-width:760px) { .modal-layout { grid-template-columns:220px minmax(0,1fr); gap:20px; padding:30px 24px; } .modal-content h2 { font-size:23px; } }
 @media(max-width:600px) { .card-modal { width:calc(100vw - 20px); max-height:calc(100dvh - 20px); border-radius:16px; } .modal-layout { grid-template-columns:1fr; padding:25px 20px; gap:24px; } .modal-visual { width:190px; margin:auto; } .modal-content h2 { font-size:25px; } .modal-odds { padding:16px; } .modal-price-tile strong { font-size:14px; } .mtg-card { contain-intrinsic-size:auto 330px; } }
+/* Public card previews retain the same grid and card detail interactions. */
+.preview-card-label { display: flex; flex-wrap: wrap; gap: .35rem; padding: .55rem .65rem; margin: 0; color: var(--gold); font-size: .6rem; line-height: 1.5; }
+.preview-card-label span { border: 1px solid var(--border); border-radius: 999px; padding: .2rem .45rem; }
+.modal-content [hidden] { display: none; }

@@ -9,6 +9,7 @@ const payload = JSON.stringify(Astro.props).replace(/</g, "\\u003c");
     <div class="modal-layout">
         <div class="modal-visual"><img id="modal-card-image" alt="" width="488" height="680" /><button id="modal-flip" type="button" class="button-secondary" hidden>Ver reverso</button><p id="modal-artist"></p></div>
         <div class="modal-content">
+            <section id="modal-preview" class="notice notice-warning mb-4" hidden aria-label="Adelanto de la carta"><strong>Adelanto publicado</strong><p id="modal-preview-status" class="mt-2"></p><p id="modal-preview-date" class="mt-2"></p><a id="modal-preview-source" class="back-link" target="_blank" rel="noopener noreferrer" hidden></a></section>
             <p class="eyebrow">Tu posible próxima carta</p><h2 id="modal-card-name"></h2><p id="modal-card-caption" class="modal-caption"></p>
             <section class="modal-odds" aria-labelledby="modal-odds-title">
                 <label for="modal-product" class="field-label">Sobre que vas a abrir</label><select id="modal-product" class="field w-full"></select>
@@ -50,10 +51,11 @@ const payload = JSON.stringify(Astro.props).replace(/</g, "\\u003c");
         const product = current.products.find(p => p.key === key);
         const odds = product?.odds;
         node("modal-finish-odds").replaceChildren();
-        text("modal-chance", odds ? percentage(odds.chance) : product ? "—" : "0 %");
+        text("modal-chance", odds ? percentage(odds.chance) : product || current.provisional ? "—" : "0 %");
         text("modal-ratio", odds && odds.chance > 0 ? odds.chance >= .999999 ? "En cada sobre de este modelo" : `Aprox. 1 de cada ${new Intl.NumberFormat("es", { maximumFractionDigits: odds.chance > .5 ? 1 : 0 }).format(1 / odds.chance)} sobres` : "");
         node("modal-chance-bar").style.width = `${(odds?.chance ?? 0) * 100}%`;
-        text("modal-odds-caption", !product ? "Esta impresión no aparece en este tipo de sobre según la composición publicada."
+        text("modal-odds-caption", current.provisional ? "Adelanto de la colección: todavía no se ha confirmado en qué sobres aparece ni su probabilidad."
+            : !product ? "Esta impresión no aparece en este tipo de sobre según la composición publicada."
             : !odds ? "Composición provisional: todavía no hay datos suficientes para calcular una probabilidad."
             : "Posibilidad de encontrar al menos una copia de esta impresión, en cualquiera de sus acabados.");
         if (odds) {
@@ -79,6 +81,19 @@ const payload = JSON.stringify(Astro.props).replace(/</g, "\\u003c");
         text("modal-card-caption", `${current.setName ?? current.set.toUpperCase()} · #${current.number} · ${rarity[current.rarity] ?? current.rarity}`);
         text("modal-artist", current.artist ? `Ilustración de ${current.artist}` : "");
         showImage();
+        node("modal-preview").hidden = !current.preview;
+        text("modal-preview-status", current.provisional ? "Su inclusión en este tipo de sobre está pendiente de confirmar." : "Esta carta ya tiene datos de composición publicados. El adelanto puede cambiar antes del lanzamiento.");
+        text("modal-preview-date", current.reveal?.previewed_at ? `Publicado el ${current.reveal.previewed_at}` : "");
+        const source = node<HTMLAnchorElement>("modal-preview-source");
+        source.hidden = true; source.removeAttribute("href"); source.textContent = "";
+        if (current.reveal?.source_uri) {
+            try {
+                const url = new URL(current.reveal.source_uri);
+                if (["https:", "http:"].includes(url.protocol)) {
+                    source.href = url.href; source.textContent = `Fuente: ${current.reveal.source ?? "ver adelanto"} ↗`; source.hidden = false;
+                }
+            } catch { /* Keep invalid or missing source URLs hidden. */ }
+        }
         const select = node<HTMLSelectElement>("modal-product");
         select.replaceChildren(...(payload.products.length ? payload.products : [{ key: "provisional", label: "Selección provisional" }]).map(p => new Option(p.label, p.key)));
         const preferred = payload.booster === "standard" ? current.products.find(p => /^(play|draft|set|default)$/.test(p.key))?.key
@@ -102,7 +117,7 @@ const payload = JSON.stringify(Astro.props).replace(/</g, "\\u003c");
         node("modal-products").replaceChildren(...current.products.map(p => {
             const row = element("div", "", "product-odds-row"); row.append(element("span", p.label), element("strong", p.odds ? percentage(p.odds.chance) : "Sin datos")); return row;
         }));
-        text("modal-data-date", `Composición publicada: ${payload.date}`);
+        text("modal-data-date", `${current.provisional ? "Datos de la colección" : "Composición publicada"}: ${payload.date}`);
         node<HTMLAnchorElement>("modal-scryfall").href = current.url;
         text("modal-rank", current.rank != null ? `EDHREC #${current.rank.toLocaleString("es")}` : "");
         node<HTMLDialogElement>("card-modal").querySelectorAll("details").forEach(d => { d.open = false; });
